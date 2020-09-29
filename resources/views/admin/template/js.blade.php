@@ -1,0 +1,1 @@
+<script src="{{asset('vendor/admin/js/app.v2.js')}}"></script> 
