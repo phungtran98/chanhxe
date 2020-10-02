@@ -60,6 +60,9 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        //tạo midlleware xong vào đây đăng kí
+        'KhachHangMiddleware' => \App\Http\Middleware\KhachHangMiddleware::class,
+        'ChanhXeMiddleware' => \App\Http\Middleware\ChanhXeMiddleware::class,
     ];
 
     /**

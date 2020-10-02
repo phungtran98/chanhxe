@@ -38,7 +38,6 @@
                                 <div class="social_links d-none d-xl-block">
                                     <ul>
                                         <li><a href="{{ route('dang-nhap') }}" ><i class="fa fa-user"></i> Đăng nhập</a></li>
-                                        <li><a href="#" ><i class="fa fa-user"></i>  Đăng kí</a></li>
                                         
                                     </ul>
                                 </div>

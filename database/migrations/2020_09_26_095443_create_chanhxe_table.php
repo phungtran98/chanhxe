@@ -16,14 +16,16 @@ class CreateChanhxeTable extends Migration
         Schema::create('chanhxe', function (Blueprint $table) {
             $table->bigIncrements('cx_id');
             $table->string('cx_hoten',199);
-            $table->string('cx_hinhanh',199);
-            $table->string('cx_diachi',199);
-            $table->string('cx_gioitinh',4);
-            $table->string('cx_sdt',10);
+            $table->string('cx_hinhanh',199)->nullable();
+            $table->string('cx_diachi',199)->nullable();
+            $table->string('cx_gioitinh',4)->nullable();
+            $table->string('cx_sdt',10)->nullable();
             $table->string('cx_cmnd',199)->nullable();
-            $table->string('cx_giayphep',199);
-            $table->string('cx_username');
-            $table->string('cx_password');
+            $table->string('cx_giayphep',199)->nullable();
+            $table->string('cx_kinhdo',199)->nullable();
+            $table->string('cx_vido',199)->nullable();
+            $table->string('username');
+            $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });

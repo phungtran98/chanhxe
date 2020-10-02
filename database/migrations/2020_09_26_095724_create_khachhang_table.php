@@ -15,7 +15,7 @@ class CreateKhachhangTable extends Migration
     {
         Schema::create('khachhang', function (Blueprint $table) {
             $table->bigIncrements('kh_id');
-            $table->string('kh_ten',199);
+            $table->string('kh_hoten',199);
             $table->string('kh_sdt',199);
             $table->string('kh_hinhanh',199)->nullable();
             $table->string('kh_diachi',199)->nullable();;

@@ -19,7 +19,6 @@ class CreateTuyenTable extends Migration
             $table->string('t_mota',199);
             $table->time('t_tgdi')->nullable();
             $table->time('t_tgden')->nullable();
-            $table->string('t_khoangcach',199);
             $table->timestamps();
         });
     }
