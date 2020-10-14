@@ -3,32 +3,32 @@
 
     // custom scrollbar
 
-    $("html").niceScroll({
-        styler: "fb",
-        cursorcolor: "#65cea7",
-        cursorwidth: '6',
-        cursorborderradius: '0px',
-        background: '#424f63',
-        spacebarenabled: false,
-        cursorborder: '0',
-        zindex: '1000'
-    });
+    // $("html").niceScroll({
+    //     styler: "fb",
+    //     cursorcolor: "#65cea7",
+    //     cursorwidth: '6',
+    //     cursorborderradius: '0px',
+    //     background: '#424f63',
+    //     spacebarenabled: false,
+    //     cursorborder: '0',
+    //     zindex: '1000'
+    // });
 
-    $(".left-side").niceScroll({
-        styler: "fb",
-        cursorcolor: "#65cea7",
-        cursorwidth: '3',
-        cursorborderradius: '0px',
-        background: '#424f63',
-        spacebarenabled: false,
-        cursorborder: '0'
-    });
+    // $(".left-side").niceScroll({
+    //     styler: "fb",
+    //     cursorcolor: "#65cea7",
+    //     cursorwidth: '3',
+    //     cursorborderradius: '0px',
+    //     background: '#424f63',
+    //     spacebarenabled: false,
+    //     cursorborder: '0'
+    // });
 
 
-    $(".left-side").getNiceScroll();
-    if ($('body').hasClass('left-side-collapsed')) {
-        $(".left-side").getNiceScroll().hide();
-    }
+    // $(".left-side").getNiceScroll();
+    // if ($('body').hasClass('left-side-collapsed')) {
+    //     $(".left-side").getNiceScroll().hide();
+    // }
 
 
 

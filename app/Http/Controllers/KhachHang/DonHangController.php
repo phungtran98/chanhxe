@@ -4,7 +4,8 @@ namespace App\Http\Controllers\KhachHang;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use DB;
+use Auth;
 class DonHangController extends Controller
 {
     /**
@@ -12,16 +13,51 @@ class DonHangController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-    }
-
+   
     //Lập đơn hàng
     public function DonHangIndex()
     {
-        return view('admin.pages.khachhang.lap-don-hang');
+       
+        // dd( $data );
+        $kh_id = Auth::guard('khachhang')->id();
+
+        $thanhPho = DB::table('tinh')->get();
+        $chanhxe = DB::table('chanhxe')->get();
+        $khachhang =DB::table('khachhang')->where('kh_id',$kh_id )->first();
+
+        return view('admin.pages.khachhang.lapdonhang.lap-don-hang',compact(['thanhPho','khachhang','chanhxe']));
+       
     }
+
+    //quy đổi KG
+    // Dịch vụ trong nước: Chiều dài x Chiều rộng x Chiều cao (cm)  / 3000
+    // Dịch vụ quốc tế:      Chiều dài x Chiều rộng x Chiều cao (cm) / 5000
+    public function changeHangHoa(Request $request)
+    {
+        if(\Request::ajax()){
+            
+            $dai= $request->dai;
+            $rong= $request->rong;
+            $cao= $request->cao;
+            $data = number_format(($dai * $rong * $cao)/3000,1) ;
+            return response()->json($data, 200);
+        }
+        return abort(404);
+    }
+
+
+    //Lấy Xe
+    public function getTuyen($id)
+    {
+        $tuyen = DB::table('tuyen')->where('cx_id', $id)->get();
+        if(\Request::ajax()){
+      
+            return response()->json($tuyen, 200);
+        }
+        return abort(404);
+    }
+
+    
 
     /**
      * Store a newly created resource in storage.
@@ -33,7 +69,7 @@ class DonHangController extends Controller
     {
         //
     }
-
+    
     /**
      * Display the specified resource.
      *

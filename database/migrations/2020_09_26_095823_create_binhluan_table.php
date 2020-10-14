@@ -16,8 +16,8 @@ class CreateBinhluanTable extends Migration
         Schema::create('binhluan', function (Blueprint $table) {
             $table->bigIncrements('bl_id');
             $table->string('bl_noidung',199)->nullable();
-            $table->integer('bl_idtraloi');
-            $table->integer('bl_danhgia');
+            $table->integer('bl_idtraloi')->nullable();
+            $table->integer('bl_danhgia')->nullable();
     
             $table->bigInteger('kh_id')->unsigned();
             $table->foreign('kh_id')->references('kh_id')->on('khachhang')->onDelete('CASCADE');
@@ -25,7 +25,8 @@ class CreateBinhluanTable extends Migration
             $table->bigInteger('cx_id')->unsigned();
             $table->foreign('cx_id')->references('cx_id')->on('chanhxe')->onDelete('CASCADE');
             
-            $table->timestamps();
+            $table->timestamp('bl_created')
+            ->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

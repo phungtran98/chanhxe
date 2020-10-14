@@ -37,8 +37,15 @@
                                 </div>
                                 <div class="social_links d-none d-xl-block">
                                     <ul>
+                                        @if (Auth::guard('khachhang')->check())
+                                            <li><a href="{{ route('kh-dashboard') }}" ><i class="fa fa-user"></i> Khách Hàng</a></li>
+                                            <li><a href="{{ route('logout-khachhang') }}" ><i class="fa fa-user"></i>Đăng xuất</a></li>
+                                        @elseif(Auth::guard('chanhxe')->check())
+                                        <li><a href="{{ route('cx-dashboard') }}" ><i class="fa fa-user"></i> Chành xe</a></li>
+                                        @else
+
                                         <li><a href="{{ route('dang-nhap') }}" ><i class="fa fa-user"></i> Đăng nhập</a></li>
-                                        
+                                        @endif
                                     </ul>
                                 </div>
                             </div>

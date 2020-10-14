@@ -52,21 +52,34 @@
 
             <!--sidebar nav start-->
             <ul class="nav nav-pills nav-stacked custom-nav">
+
+                {{-- khách hàng --}}
                 @if (auth::guard('khachhang')->check())
                     <li class="{{Request::path()== 'khach-hang/dashboard' ? 'active' : '' }}"><a href="{{ route('kh-dashboard') }}"><i class="fa fa-home"></i> <span>Trang chủ</span></a>
                     </li>
-                    <li class="{{Request::path()== 'khach-hang/lap-don-hang' ? 'active' : '' }}"><a href="{{ route('kh-don-hang') }}"><i class="fa fa-home"></i> <span>Tạo đơn hàng</span></a>
+                    <li class="{{Request::path()== 'khach-hang/lap-don-hang' ? 'active' : '' }}"><a href="{{ route('kh-don-hang') }}"><i class="fa fa-list-alt"></i> <span>Tạo đơn hàng</span></a>
                     </li>
-                    <li class="{{Request::path()== 'khach-hang/quan-li-don-hang' ? 'active' : '' }}"><a href="{{ route('kh-ql-don-hang') }}"><i class="fa fa-home"></i> <span>Quản lí đơn hàng</span></a>
+                    <li class="{{Request::path()== 'khach-hang/quan-li-don-hang' ? 'active' : '' }}"><a href="{{ route('kh-ql-don-hang') }}"><i class="fa fa-indent"></i> <span>Quản lí đơn hàng</span></a>
                     </li>
-                    <li class="menu-list"><a href="#"><i class="fa fa-book"></i> <span>Tra cứu</span></a>
+                    <li class="menu-list"><a href="#"><i class="fa fa-search"></i> <span>Tra cứu</span></a>
                         <ul class="sub-menu-list">
                             <li class="{{Request::path()== 'khach-hang/uoc-luong-chi-phi' ? 'active' : '' }}"><a href="{{ route('kh-uoc-luong-chi-phi') }}"> Ước lượng chi phí</a></li>
                             <li class="{{Request::path()== 'khach-hang/tra-cuu-chanh-xe' ? 'active' : '' }}"><a href="{{ route('kh-tra-cuu-chanh-xe') }}"> Tra cứu chành xe</a></li>
-                            
                         </ul>
                     </li>
-                    <li><a href=""><i class="fa fa-sign-in"></i> <span>Đăng xuất</span></a></li>
+                    <li><a href="{{ route('logout-khachhang') }}"><i class="fa fa-sign-in"></i> <span>Đăng xuất</span></a></li>
+
+                {{-- Chành xe --}}
+                @elseif(auth::guard('chanhxe')->check())
+                    <li class=""><a href="{{ route('cx-dashboard') }}"><i class="fa fa-home"></i> <span>Trang chủ</span></a>
+                    </li>
+                    <li class=""><a href="{{ route('cx-quan-li-don-dat-hang') }}"><i class="fa fa-list-alt"></i> <span>Quản lí đơn đặt hàng</span></a>
+                    </li>
+                    <li class=""><a href="{{ route('cx-quan-li-khach-hang') }}"><i class="fa fa-user"></i> <span>Quản lí khách hàng</span></a>
+                    </li>
+                    <li class=""><a href="{{ route('cx-cai-dat', ['id'=>1]) }}"><i class="fa fa-cogs"></i> <span>Cài đặt</span></a>
+                    </li>
+                    <li><a href="{{ route('logout-chanhxe') }}"><i class="fa fa-sign-in"></i> <span>Đăng xuất</span></a></li>
                 @endif
 
             </ul>

@@ -4,7 +4,8 @@ namespace App\Http\Controllers\KhachHang;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use DB;
+use Auth;
 class KhachHangController extends Controller
 {
     /**
@@ -14,14 +15,16 @@ class KhachHangController extends Controller
      */
     public function index()
     {
+        
         return view('users.pages.index');
     }
 
 
-    //Trang quản trị cảu khách hàng
+    //Trang quản trị của khách hàng
     public function AdminKhachHang()
     {
-        return view('admin.pages.khachhang.index');
+        $chanhxe = DB::table('chanhxe')->get();
+        return view('admin.pages.khachhang.trangchu.index',compact('chanhxe'));
     }
 
     

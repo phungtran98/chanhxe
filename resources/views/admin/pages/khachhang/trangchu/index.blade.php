@@ -69,36 +69,48 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-12">
-        <section class="panel">
-            <header class="panel-heading">
-                Bar Chart
-            <span class="tools pull-right">
-                <a href="javascript:;" class="fa fa-chevron-down"></a>
-                <a href="javascript:;" class="fa fa-times"></a>
-             </span>
-            </header>
-            <div class="panel-body">
-                <div id="graph-bar"></div>
-            </div>
-        </section>
+    <div class="col-md-12">
+        {{-- <h4 class="text-center">Chành Xe</h4> --}}
     </div>
-</div>
-<div class="row">
-    <div class="col-sm-12">
-        <section class="panel">
-            <header class="panel-heading">
-                Line Chart
-            <span class="tools pull-right">
-                <a href="javascript:;" class="fa fa-chevron-down"></a>
-                <a href="javascript:;" class="fa fa-times"></a>
-             </span>
-            </header>
-            <div class="panel-body">
-                <div id="graph-line"></div>
+    @foreach ($chanhxe as $item)
+        <div class="col-md-4 max-height-cx">
+             <div class="panel widget-info-one">
+                <div class="avatar-img">
+                    <a href="{{ route('kh-thong-tin-chanh-xe', ['id'=>$item->cx_id]) }}"><img src="{{asset('vendor/admin/images/gallery/image3.jpg')}}" alt=""/></a>
+                </div>
+                <div class="inner">
+                    <div class="avatar"><a href="{{ route('kh-thong-tin-chanh-xe', ['id'=>$item->cx_id]) }}"><img alt="" src="{{asset('vendor/admin/images/photos/userprofile.png')}}"></a></div>
+                    <h5> {{$item->cx_tenchanhxe}}</h5>
+                    <span class="subtitle">
+                        Praesent magna nunc, tincidunt pretium.
+                    </span>
+                </div>
+                <div class="panel-footer">
+                    <ul class="post-view">
+                        <li>
+                            <a href="{{ route('kh-thong-tin-chanh-xe', ['id'=>$item->cx_id]) }}">
+                                <i class="fa fa-eye"></i>
+                            </a>
+                            109
+                        </li>
+                        <li class="active">
+                            <a href="{{ route('kh-thong-tin-chanh-xe', ['id'=>$item->cx_id]) }}">
+                                <i class="fa fa-comment"></i>
+                            </a>
+                            233
+                        </li>
+                        <li>
+                            <a href="{{ route('kh-thong-tin-chanh-xe', ['id'=>$item->cx_id]) }}">
+                                <i class="fa fa-star"></i>
+                            </a>
+                            3.5/5
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </section>
-    </div>
+        </div>
+    @endforeach
+    
 </div>
 @endsection
 @push('scritt')

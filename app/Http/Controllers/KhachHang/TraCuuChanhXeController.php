@@ -21,7 +21,7 @@ class TraCuuChanhXeController extends Controller
     //tra cứu chành xe
     public function TraCuuCXIndex()
     {
-        return view('admin.pages.khachhang.tra-cuu-chanh-xe');
+        return view('admin.pages.khachhang.tracuu.tra-cuu-chanh-xe');
     }
 
     

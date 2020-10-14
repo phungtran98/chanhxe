@@ -15,10 +15,8 @@ class CreateDonvanchuyenTable extends Migration
     {
         Schema::create('donvanchuyen', function (Blueprint $table) {
             $table->bigIncrements('dvc_id');
+            $table->date('dvc_ngaylap');
             
-            $table->bigInteger('x_id')->unsigned();
-            $table->foreign('x_id')->references('x_id')->on('xe')->onDelete('CASCADE');
-
             $table->bigInteger('kh_id')->unsigned();
             $table->foreign('kh_id')->references('kh_id')->on('khachhang')->onDelete('CASCADE');
 

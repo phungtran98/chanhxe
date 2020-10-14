@@ -28,8 +28,11 @@ class CreateChitietdonvanchuyenTable extends Migration
             
             $table->bigInteger('hh_id')->unsigned();
             $table->foreign('hh_id')->references('hh_id')->on('hanghoa')->onDelete('CASCADE');
+            
+            $table->bigInteger('t_id')->unsigned();
+            $table->foreign('t_id')->references('t_id')->on('tuyen')->onDelete('CASCADE');
 
-            $table->primary(['dvc_id','hh_id']);
+            $table->primary(['dvc_id','hh_id','t_id']);
             
             $table->timestamps();
         });

@@ -13,7 +13,6 @@
     <!--notification menu start -->
     <div class="menu-right">
         <ul class="notification-menu">
-           
             <li>
                 <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
                     <i class="fa fa-envelope-o"></i>
@@ -24,7 +23,7 @@
                     <ul class="dropdown-list normal-list">
                         <li class="new">
                             <a href="#">
-                                <span class="thumb"><img src="images/photos/user1.png" alt="" /></span>
+                                {{-- <span class="thumb"><img src="images/photos/user1.png" alt="" /></span> --}}
                                 <span class="desc">
                                   <span class="name">John Doe <span class="badge badge-success">new</span></span>
                                   <span class="msg">Lorem ipsum dolor sit amet...</span>
@@ -52,20 +51,41 @@
                 </div>
             </li>
             <li>
-                <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <img src="{{asset('vendor/admin/images/photos/user-avatar.png')}}" alt="" />
-                    Thanh Phụng
-                    <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
-                    <li><a href="#"><i class="fa fa-user"></i> Trang cá nhân</a></li>
-                    <li><a href="#"><i class="fa fa-cog"></i>  Cài đặt</a></li>
-                    @if (Auth::guard('chanhxe')->check())
-                    <li><a href="{{ route('logout-chanhxe') }}"><i class="fa fa-sign-out"></i>Đăng xuất</a></li>
-                    @elseif(Auth::guard('khachhang')->check())
-                    <li><a href="{{ route('logout-khachhang') }}"><i class="fa fa-sign-out"></i>Đăng xuất</a></li>
-                    @endif
-                </ul>
+                @if (auth::guard('khachhang')->check())
+                    <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        @if (Auth::guard('khachhang')->user()->kh_hinhanh == null)
+                        <img src="{{asset('upload/khachhang/user-placeholder.png')}}" alt="" > 
+                        @endif
+                        <img src="{{asset('upload/khachhang/'.Auth::guard('khachhang')->user()->kh_hinhanh)}}" alt="" />
+                        {{Auth::guard('khachhang')->user()->kh_hoten}}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                        <li><a href="{{ route('kh-cai-dat') }}"><i class="fa fa-cog"></i>  Cài đặt</a></li>
+                        @if (Auth::guard('chanhxe')->check())
+                        <li><a href="{{ route('logout-chanhxe') }}"><i class="fa fa-sign-out"></i>Đăng xuất</a></li>
+                        @elseif(Auth::guard('khachhang')->check())
+                        <li><a href="{{ route('logout-khachhang') }}"><i class="fa fa-sign-out"></i>Đăng xuất</a></li>
+                        @endif
+                    </ul>
+                @elseif(auth::guard('chanhxe')->check())
+                    <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        @if (Auth::guard('chanhxe')->user()->kh_hinhanh == null)
+                        <img src="{{asset('upload/khachhang/user-placeholder.png')}}" alt="" > 
+                        @endif
+                        <img src="{{asset('upload/chanhxe/'.Auth::guard('chanhxe')->user()->kh_hinhanh)}}" alt="" />
+                        {{Auth::guard('chanhxe')->user()->cx_hoten}}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                        <li><a href="{{ route('kh-cai-dat') }}"><i class="fa fa-cog"></i>  Cài đặt</a></li>
+                        @if (Auth::guard('chanhxe')->check())
+                        <li><a href="{{ route('logout-chanhxe') }}"><i class="fa fa-sign-out"></i>Đăng xuất</a></li>
+                        @elseif(Auth::guard('khachhang')->check())
+                        <li><a href="{{ route('logout-khachhang') }}"><i class="fa fa-sign-out"></i>Đăng xuất</a></li>
+                        @endif
+                    </ul>
+                @endif
             </li>
 
         </ul>

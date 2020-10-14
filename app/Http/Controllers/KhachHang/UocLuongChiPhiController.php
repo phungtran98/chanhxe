@@ -20,7 +20,7 @@ class UocLuongChiPhiController extends Controller
     //tra cứu đơn hàng
     public function TraCuuDonIndex()
     {
-        return view('admin.pages.khachhang.uoc-luong-chi-phi');
+        return view('admin.pages.khachhang.uocluongchiphi.uoc-luong-chi-phi');
     }
 
 

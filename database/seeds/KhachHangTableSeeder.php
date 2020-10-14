@@ -14,7 +14,6 @@ class KhachHangTableSeeder extends Seeder
         $data = [
             [   
                 'kh_hoten' =>'Trần Thanh Phụng',
-                'kh_sdt' =>'0123456789',
                 'username' => 'ctu',
                 'password' => bcrypt('ctu'),
             ],

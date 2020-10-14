@@ -83,6 +83,6 @@
         </div>
     </div>
 @endsection
-@push('scritt')
+@push('script')
     
 @endpush

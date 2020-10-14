@@ -21,7 +21,7 @@ class QLDonHangController extends Controller
     //Quản lí đơn hàng
     public function QLDonHangIndex()
     {
-        return view('admin.pages.khachhang.quan-li-don-hang');
+        return view('admin.pages.khachhang.quanlidonhang.quan-li-don-hang');
     }
     
     /**
