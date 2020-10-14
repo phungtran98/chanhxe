@@ -15,8 +15,8 @@ class CreateBaidauxeTable extends Migration
     {
         Schema::create('baidauxe', function (Blueprint $table) {
             $table->bigIncrements('bdx_id');
-            $table->string('bdx_daichi',199);
-            $table->string('bdx_mota',199);
+            $table->string('bdx_diachi',199);
+            $table->string('bdx_mota',199)->nullable();
             $table->timestamps();
         });
     }

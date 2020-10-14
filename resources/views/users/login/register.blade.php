@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Đăng nhập |</title>
+    <title>Chành xe | Đăng nhập</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon"  type="image/png"  href="" />
+    <link rel="shortcut icon" href=" {{asset('vendor/users/images/logo/1.png')}} " type="image/png">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
@@ -19,6 +19,14 @@
     <link rel="stylesheet" type="text/css" href="{{asset('client/slick/slick-theme.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('client/css/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('client/css/responsive.css')}}">
+    <style>
+        .mystyle {
+            border: 1px solid #f90b0b;
+        }
+        .mystyle1 {
+            border: 1px solid yellow;
+        }
+    </style>
 </head>
 
 
@@ -55,9 +63,9 @@
                                             <li data-tab="tab-4"><a href="#" title="">Chành Xe</a></li>
                                         </ul>
                                     </div>
-                                    <!--Phần này của nông dân-->
+                                    <!--Phần đăng nhập này của khách hàng-->
                                     <div class="dff-tab current" id="tab-3">
-                                        {{-- xử lý nông dân nè --}}
+                                        {{-- xử lý khách hàng --}}
                                         <form action="{{ route('login-khach-hang') }}" method="post">
                                             @csrf
                                             <div class="row">
@@ -82,10 +90,10 @@
                                             </div>
                                         </form>
                                     </div>
-                                    <!--Phần này của thương lái-->
+                                    <!--Phần  đăng nhập này của chành xe-->
                                     <div class="dff-tab" id="tab-4">
-                                        {{-- xử lý đăng nhập thương lái --}}
-                                        <form method="post" action="">
+                                        {{-- xử lý đăng nhập chành xe --}}
+                                        <form method="post" action="{{ route('login-chanhxe') }}">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-lg-12 no-pdd">
@@ -120,47 +128,47 @@
                                             <li data-tab="tab-6"><a href="#" title="">Chành Xe</a></li>
                                         </ul>
                                     </div>
-                                    <!--Phần này của nông dân-->
+                                    <!--Phần này của khách hàng-->
                                     <div class="dff-tab current" id="tab-5">
                                         {{-- FORM NÀY DÀNH CHO ĐĂNG KÝ Khách Hàng --}}
-                                        <form method="post" action="">
+                                        <form method="post" action="{{ route('register-khachhang') }}">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="text" name="username" placeholder="Tên đăng nhập">
+                                                        <input type="text" name="kh_hoten" placeholder="Họ tên">
+                                                        <i class="la la-user"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input type="text" name="kh_username" placeholder="Tên đăng nhập">
                                                         <i class="la la-user"></i>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="password" name="password" placeholder="Mật khẩu">
+                                                        <input type="password" name="kh_password" placeholder="Mật khẩu">
                                                         <i class="la la-lock"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="password" name="repeat-password"
+                                                        <input type="password" name="repeat-password" id="repeat-password" onkeyup="checkpass()"
                                                             placeholder="Nhập lại mật khẩu">
                                                         <i class="la la-lock"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="text" name="nd_hoten" placeholder="Họ tên">
+                                                        <input type="text" name="kh_sdt" placeholder="Số điện thoại">
                                                         <i class="la la-user"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="text" name="nd_sdt" placeholder="Số điện thoại">
-                                                        <i class="la la-user"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 no-pdd">
-                                                    <div class="sn-field">
-                                                        <input type="text" name="nd_diachi" placeholder="Địa chỉ">
+                                                        <input type="text" name="kh_diachi" placeholder="Địa chỉ">
                                                         <i class="la la-globe"></i>
                                                     </div>
                                                 </div>
@@ -170,47 +178,47 @@
                                             </div>
                                         </form>
                                     </div>
-                                    <!--Phần này của thương lái-->
+                                    <!--Phần này của chành xe-->
                                     <div class="dff-tab" id="tab-6">
                                         {{-- FORM NÀY DÀNH CHO ĐĂNG KÝ Chành xe --}}
-                                        <form action="" method="post">
+                                        <form action="{{ route('register-chanhxe') }}" method="post">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="text" name="username" placeholder="Tên đăng nhập">
+                                                        <input type="text" name="cx_hoten" placeholder="Họ tên">
+                                                        <i class="la la-user"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 no-pdd">
+                                                    <div class="sn-field">
+                                                        <input type="text" name="cx_username" placeholder="Tên đăng nhập">
                                                         <i class="la la-user"></i>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="password" name="password" placeholder="Mật khẩu">
+                                                        <input type="password" name="cx_password" id="password" placeholder="Mật khẩu">
                                                         <i class="la la-lock"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
                                                         <input type="password" name="repeat-password"
-                                                            placeholder="Nhập lại mật khẩu">
+                                                            placeholder="Nhập lại mật khẩu" id="repeat-password" onkeyup="checkpass()">
                                                         <i class="la la-lock"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="text" name="tl_hoten" placeholder="Họ tên">
+                                                        <input type="text" name="cx_sdt" placeholder="Số điện thoại">
                                                         <i class="la la-user"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="text" name="tl_sdt" placeholder="Số điện thoại">
-                                                        <i class="la la-user"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 no-pdd">
-                                                    <div class="sn-field">
-                                                        <input type="text" name="tl_diachi" placeholder="Địa chỉ">
+                                                        <input type="text" name="cx_diachi" placeholder="Địa chỉ">
                                                         <i class="la la-globe"></i>
                                                     </div>
                                                 </div>
@@ -253,6 +261,26 @@
     <script type="text/javascript" src="{{asset('client/js/bootstrap.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('client/slick/slick.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('client/js/script.js')}}"></script>
+    <script>
+        //kiểm tra mật khẩu
+         
+        // function checkpass() {
+        //     var x = document.getElementById("repeat-password").value;
+        //     var y = document.getElementById("password").value;
+
+        //     if(x != y){
+        //         var element = document.getElementById("repeat-password");
+        //         element.classList.add("mystyle");
+        //     }
+        //     else
+        //     {
+                
+        //         var element = document.getElementById("repeat-password");
+        //         element.classList.add("mystyle1");
+        //     }
+            
+        // }
+    </script>
 </body>
 
 </html>

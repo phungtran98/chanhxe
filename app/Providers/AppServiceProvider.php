@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use DB;
+use Auth;
+use View;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -23,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // $kh = DB::table('khachhang')->where('kh_id',auth::guard('khachhang')->id())->first();
+      
+        // View::share('shareKH',$kh);
+
     }
 }
