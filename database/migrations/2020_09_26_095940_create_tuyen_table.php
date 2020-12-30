@@ -16,19 +16,10 @@ class CreateTuyenTable extends Migration
         Schema::create('tuyen', function (Blueprint $table) {
             $table->bigIncrements('t_id');
             $table->string('t_tentuyen',199);
-            $table->string('t_mota',199);
-            $table->time('t_tgdi')->nullable();
-            $table->time('t_tgden')->nullable();
-
-            $table->bigInteger('bdx_id')->unsigned();
-            $table->foreign('bdx_id')->references('bdx_id')->on('baidauxe')->onDelete('CASCADE');
+            $table->text('t_mota',199)->nullable();
             
             $table->bigInteger('x_id')->unsigned();
             $table->foreign('x_id')->references('x_id')->on('xe')->onDelete('CASCADE');
-
-            $table->bigInteger('cx_id')->unsigned();
-            $table->foreign('cx_id')->references('cx_id')->on('chanhxe')->onDelete('CASCADE');
-
             $table->timestamps();
         });
     }

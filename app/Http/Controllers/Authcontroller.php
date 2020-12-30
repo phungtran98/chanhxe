@@ -33,7 +33,7 @@ class Authcontroller extends Controller
         {
             $taikhoan = Khachhang::where('username', '=' , $request->username)->where('password', '=', $request->password)->first();
             
-            return redirect()->route('kh-dashboard');
+            return redirect()->route('trang-chu-khach-hang');
 
         } else {
             dd('Sai cmn rồi Phụng ơi! mầy ngu quá');

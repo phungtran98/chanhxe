@@ -22,10 +22,13 @@ class CreateChanhxeTable extends Migration
             $table->string('cx_sdt',10)->nullable();
             $table->string('cx_cmnd',199)->nullable();
             $table->string('cx_giayphep',199)->nullable();
+            $table->text('cx_mota',199)->nullable();
+            $table->string('cx_masothue',199)->nullable();
             $table->string('cx_kinhdo',199)->nullable();
             $table->string('cx_vido',199)->nullable();
+            $table->string('cx_email',199)->nullable();
             $table->string('code')->nullable();
-            $table->tinyInteger('activate')->default(0);
+            $table->integer('active')->default(0);
             $table->string('username');
             $table->string('password');
             $table->rememberToken();

@@ -26,7 +26,7 @@
 /* Large Mobile :480px. */
 /* line 6, ../../Arafath/CL/December/231. Travel-02/HTML/scss/theme-default.scss */
 body {
-  font-family: "Rubik", sans-serif;
+  /* font-family: "Rubik", sans-serif; */
   font-weight: normal;
   font-style: normal;
 }
@@ -78,7 +78,7 @@ button {
 
 /* line 40, ../../Arafath/CL/December/231. Travel-02/HTML/scss/theme-default.scss */
 h1, h2, h3, h4, h5 {
-  font-family: "Rubik", sans-serif;
+  /* font-family: "Rubik", sans-serif; */
   color: #001D38;
 }
 
@@ -110,7 +110,7 @@ p {
   line-height: 28px;
   color: #7A838B;
   margin-bottom: 0px;
-  font-family: "Rubik", sans-serif;
+  /* font-family: "Rubik", sans-serif; */
 }
 
 /* line 69, ../../Arafath/CL/December/231. Travel-02/HTML/scss/theme-default.scss */
@@ -482,7 +482,7 @@ h3 {
   color: #fff;
   display: inline-block;
   padding: 14px 44px;
-  font-family: "Rubik", sans-serif;
+  /* font-family: "Rubik", sans-serif; */
   font-size: 14px;
   font-weight: 400;
   border: 0;
@@ -516,7 +516,7 @@ h3 {
   color: #fff;
   display: inline-block;
   padding: 18px 41px;
-  font-family: "Rubik", sans-serif;
+  /* font-family: "Rubik", sans-serif; */
   font-size: 16px;
   font-weight: 500;
   border: 0;
@@ -554,7 +554,7 @@ h3 {
   color: #fff;
   display: inline-block;
   padding: 13px 39px;
-  font-family: "Rubik", sans-serif;
+  /* font-family: "Rubik", sans-serif; */
   font-size: 16px;
   font-weight: 500;
   border: 0;
@@ -1299,7 +1299,7 @@ h3 {
 
 /* line 4, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_slider.scss */
 .slider_bg_2 {
-  background-image: url(../img/banner/banner2.png);
+  background-image: url(../images/banner/bg_3.jpg);
 }
 
 /* line 7, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_slider.scss */
@@ -5025,22 +5025,22 @@ h6 {
 }
 
 /* line 10, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_blog.scss */
-.blog_area a {
+/* .blog_area a {
   color: #666666 !important;
   text-decoration: none;
   -webkit-transition: 0.5s;
   transition: 0.5s;
-}
+} */
 
 /* line 14, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_blog.scss */
-.blog_area a:hover, .blog_area a :hover {
-  background: -webkit-linear-gradient(131deg, #FF4A52 0%, #FF4A52 99%);
+/* .blog_area a:hover, .blog_area a :hover {
+  background: none;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-decoration: none;
   -webkit-transition: 0.5s;
   transition: 0.5s;
-}
+} */
 
 /* line 24, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_blog.scss */
 .single-blog {

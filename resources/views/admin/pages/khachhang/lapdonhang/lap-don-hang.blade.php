@@ -4,161 +4,93 @@
 @endsection
 @section('breadcrumb')
     <li>
+        <a href="#" class="active">Thông tin chành xe</a>
+    </li>
+    <li>
         <a href="#" class="active">Tạo đơn hàng</a>
     </li>
 @endsection
 @push('css')
-    <style>
-        .star-red{
-            color:red;
-        }
-        .user-oder{
-            
-        }
-        input#KG {
-            text-align: center;
-            font-size: 16px;
-            font-weight: 700;
-        }
-    </style>
+
+<style>
+#regForm {
+  /* background-color: #ffffff;
+  margin: 100px auto; */
+  /* padding: 40px; */
+  /* width: 70%;
+  min-width: 300px; */
+}
+img.TuyChinhImg {
+    width: 40%;
+    margin: 10px; 
+       float: right;
+}
+/* Style the input fields */
+input {
+  padding: 10px;
+  width: 100%;
+
+  border: 1px solid #aaaaaa;
+}
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
+input#checkbox1,input#checkbox2 {
+    margin-left: -29px;
+    width: 94px;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+/* Mark the active step: */
+.step.active {
+  opacity: 1;
+}
+.CheckValue:focus{
+    border: 1px solid #466342 !important;
+    box-shadow: none;
+}
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #4CAF50;
+}
+.DontCheckGG{
+    border: 1px solid red !important;
+}
+.CheckGG{
+    border: 1px solid green !important;
+}
+</style>
 @endpush
 @section('content')
-<form method="get" action="">
-    <div class="row">
-        <div class="col-md-6">
-            {{-- Thông tin người gửi --}}
-            <div class="col-md-12">
-                <div class="panel ">
-                    <div class="panel-heading">
-                        <div class="user-send">
-                            <img src=" {{asset('images/u-send.png')}} " alt="">
-                            <p class="float-right user-oder" style="display:inline-block">Người gửi:</p>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="">Họ tên người gửi <span class="star-red">*</span></label>
-                                    <input type="text"
-                                    class="form-control" name="kh_hoten" id=""  value=" {{$khachhang->kh_hoten}} ">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <p>Địa điểm lấy hàng hóa <span class="star-red">*</span></p>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <input type="text"
-                                    class="form-control" name="" id="getPlace"  placeholder="30/4, Xuân Khánh,..">
-                                </div>
-                            </div>   
 
-                        </div>
-                        {{-- Chọn chành xe --}}
-                       <div class="form-group">
-                         <label for="">Chọn Chành xe <span class="star-red">*</span></label>
-                         <select class="form-control" name="" id="chanhXe">
-                             <option value="">---Chành Xe---</option>
-                            @foreach ($chanhxe as $item)
-                                <option value=" {{$item->cx_id}} "> {{$item->cx_tenchanhxe}} </option>
-                            @endforeach
-                         </select>
-                       </div>
-                       {{-- Chọn tuyến --}}
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                  <label for="">Chọn tuyến <span class="star-red">*</span></label>
-                                  <select class="form-control Tuyen" name="tuyen" id="Tuyen">
-                                   
-                                  </select>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="">Địa điểm lấy hàng hóa <span class="star-red">*</span></label>
-                                    <input type="text"
-                                    class="form-control" name="" id=""  placeholder="30/4, Xuân Khánh,..">
-                                </div>
-                            </div>                   
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{-- Thông tin người nhận --}}
-            <div class="col-md-12">
-                <div class="panel ">
-                    <div class="panel-heading">
-                        <div class="user-send">
-                            <img src=" {{asset('images/u-re.png')}} " alt="">
-                            <p class="float-right user-oder" style="display:inline-block">Người nhận:</p>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <label for="name">Họ tên <span class="star-red">*</span></label>
-                            <input type="text"
-                            class="form-control" name="" id="name"  placeholder="Nguyến văn A">
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Số điện thoại <span class="star-red">*</span></label>
-                            <input type="text"
-                            class="form-control" name="phone" id="phone"  placeholder="0123456789">
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="city">Tỉnh/Thành phố</label>
-                                    <select class="form-control" name="city" id="Tinh" style="padding-left: 0px;padding-right: 0px;width: 150px;">
-                                            <option value="null">Chọn Thành Phố</option>
-                                        @foreach ($thanhPho as $item)
-                                            <option value=" {{$item->t_id}} ">  {{$item->t_ten}} </option> 
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group" style="margin-left: -10px">
-                                    <label for="">Quận/Huyện</label>
-                                    <select class="form-control quanHuyen" name="" id="quanHuyen"  disabled style="padding-left: 0px;padding-right: 0px;width: 154px;">
-                                        <option value="" id="delQuanHuyen">Chọn Quận - Huyện</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4" style="padding-left: 4px">
-                                <div class="form-group">
-                                    <label for="">Phường/Xã</label>
-                                    <select class="form-control phuongXa" name="" id="phuongXa" disabled style="padding-left: 0px;padding-right: 0px;width: 154px;">
-                                        <option value="" id="delPhuongXa">Chọn Phường - Xã</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="">Số nhà, tên đường,...</label>
-                                    <input type="text"
-                                    class="form-control" name="" id=""  placeholder="30/4, Xuân Khánh,..">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="my-textarea">Ghi chú</label>
-                                    <textarea id="my-textarea" class="form-control" name="" rows="3" style="resize: none"></textarea>
-                                </div>
-                            </div>
-
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-            {{-- ghi chú thêm --}}
-           
-        </div>
-        <div class="col-md-6">
+<div class="row" id="regForm">
+    <div class="col-md-12">
+       <h3 style="/* float: left; *//* margin-left: 4px; */color: #075f5b;font-weight: bold;font-size: 20px;text-align: center;margin-top: -10px;">{{$tuyen->cx_tenchanhxe}}<span > Tuyến </span>{{$tuyen->t_tentuyen}}</h3> 
+    </div>
+    <form method="post" action="{{ route('kh-ql-don-hang-luu') }}" enctype="multipart/form-data" id="Submit_HH">
+        @csrf
+        <div class="col-md-12 ">
+          <div class="tab">
              {{-- Thông tin hang hóa --}}
-             <div class="col-md-12">
+             <div class="col-md-9" style="margin-left: 115px">
                 <div class="panel ">
                     <div class="panel-heading">
                         <div class="user-send">
@@ -167,103 +99,406 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                    <div class="form-group">
-                        <label for="">Tên hàng hóa <span class="star-red">*</span> </label>
-                        <input type="text"
-                        class="form-control" name="" id=""  placeholder="Điện thoại di động...">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Số lượng <span class="star-red">*</span> </label>
-                        <input type="text"
-                        class="form-control" name="" id=""  placeholder="0">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Giá trị của hàng hóa (VNĐ): </label>
-                        <input type="text"
-                        class="form-control" name="" id=""  placeholder="">
-                    </div>
+                      <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Tên hàng hóa <span class="star-red">*</span> </label>
+                                <input type="text"
+                                class="form-control CheckValue" name="hh_ten" id=""  placeholder="Tên hàng hóa" required>
+                            </div>
+                            <div class="form-group">
+                            <label for="">Hình ảnh hàng hóa ( Nếu có )</label>
+                            <input type="file" class="form-control-file" name="hh_hinhanh[]" multiple id="files" >
+                            </div>
+                            <div class="form-group">
+                                <label for="">Giá trị của hàng hóa (VNĐ) <span class="star-red">*</span></label>
+                                <input type="number"
+                                class="form-control  CheckValue" name="hh_giatri" id=""  placeholder="" required>
+                            </div>
+                          </div>
+                          <div class="col-md-6" id="result">
+                           
+                          </div>    
+                      </div>
                     {{-- cách qui đổi --}}
                     <div class="row">
-                        <div class="col-12 ">
-                            <p class="" style="margin-left:15px">Kích thước</p>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <input type="text"
-                                class="form-control" name="" id="Dai"  placeholder="Dài (cm)">
+                       <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-12 ">
+                                    <p class="" style="margin-left:15px">Kích thước</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input type="number"
+                                        class="form-control  CheckValue" name="Dai" id="Dai"  placeholder="Dài (cm)">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input type="number"
+                                        class="form-control  CheckValue" name="Rong" id="Rong"  placeholder="Rộng (cm)">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input type="number"
+                                        class="form-control  CheckValue" name="Cao" id="Cao"  placeholder="Cao (cm)">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                    {{-- <label for="">Quy đổi (Kg)</label> --}}
+                                        <input type="number"
+                                        class="form-control" name="hh_khoiluong" id="KG" disabled  placeholder="Quy đổi (KG)" >
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="">Số lượng <span class="star-red">*</span> </label>
+                                        <input type="number"
+                                        class="form-control  CheckValue"  name="hh_soluong" id=""  placeholder="0">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="">Tổng khối lượng (KG)<span class="star-red">*</span></label>
+                                        <input type="number" step="0.1"
+                                        class="form-control  CheckValue" min="0" name="hh_khoiluong" id="KG"  placeholder="" >
+                                       
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <input type="text"
-                                class="form-control" name="" id="Rong"  placeholder="Rộng (cm)">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <input type="text"
-                                class="form-control" name="" id="Cao"  placeholder="Cao (cm)">
-                            </div>
-                        </div>
+                       </div>
                        
-                        <div class="col-md-4">
-                            <div class="form-group">
-                               <label for="">Quy đổi (Kg)</label>
-                                <input type="text"
-                                class="form-control" name="" id="KG"  placeholder="" readonly>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <p>Người trả cước</p>
-                                <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="ok" id="" value="checkedValue" checked>
-                                    Người gửi
-                                </label>&nbsp;
-                                &nbsp;
-                                &nbsp;
-                                <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" name="ok" id="" value="checkedValue" >
-                                    Người nhận
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                           <div class="col-6">
-                               <div class="btn btn-default">Làm lại</div>
-                               <div class="btn btn-success">Lưu</div>
-                           </div>
-                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Số tiền thu hộ<span class="star-red">*</span></label>
+                        <input type="text"
+                        class="form-control" name="hh_tienthuho" id="hh_tienthuho" max="10000000000" value="0" placeholder="Nhập số tiền thu hộ" style="width:50%"   >
+                    </div>
+                    <div class="form-group">
+                        <label for="">Ghi chú <span class="star-red">*</span></label>
+                        <textarea class="form-control" name="hh_ghichu" id="" rows="3"></textarea>
                     </div>
                     
                     </div>
                 </div>
             </div>
+          </div>
         </div>
-    </div>
-</form>
-{{-- <p id="demo"></p> --}}
-    {{-- <div class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title " style="text-align: center; font-size:18px;">Giợi ý Chành Xe gần bạn</h5>
-        </div>
-        <div class="modal-body">
-            <div class="dir-info ShowChanhXe" >
-                
+        <div class="col-md-12">
+            <div class="col-md-9" style="margin-left: 115px; position:relative">
+                <div class="tab">
+                     {{-- Thông tin người nhận --}}
+                     <div class="panel ">
+                        <div class="panel-heading">
+                            <div class="user-send">
+                                <img src=" {{asset('images/u-re.png')}} " alt="">
+                                <p class="float-right user-oder" style="display:inline-block">Người nhận:</p>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="name">Họ tên <span class="star-red">*</span></label>
+                                <input type="text"
+                                class="form-control" name="kh_nhan_ten" id="name" style="width:55%"  placeholder="Nguyến văn A">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Số điện thoại <span class="star-red">*</span></label>
+                                <input type="text"
+                                class="form-control" style="width:55%" name="kh_nhan_sdt" id="phone"  placeholder="0123456789">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">Địa chỉ <span class="star-red">*</span></label>
+                                        <input type="text"
+                                        class="form-control" style="width:55%" name="kh_nhan_diachi" id="getPlace"  placeholder="30/4, Xuân Khánh,..">
+                                        <input type="hidden" name="kh_nhan_km" id="kh_nhan_km" >
+                                        <input type="hidden" name="kh_nhan_tgchay" id="kh_nhan_tgchay" >
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="my-textarea">Ghi chú</label>
+                                        <textarea id="my-textarea" class="form-control" style="width:55%" name="kh_nhan_ghichu" rows="4" style="resize: none"></textarea>
+                                    </div>
+                                </div>
+        
+                            </div>
+                            
+                        </div>
+                        <img src=" {{asset('upload/khachhang/hh.png')}} " alt="" style="width: 37%;position: absolute;top: 122px;right: 40px;">
+                    </div>
+                   
+                </div>
             </div>
         </div>
+        <div class="col-md-12">
+            <div class="col-md-9" style="margin-left: 115px">
+                <div class="tab">
+                    {{-- Thông tin người gửi --}}
+                    <div class="panel ">
+                        <div class="panel-heading">
+                            <div class="user-send">
+                                <img src=" {{asset('images/u-send.png')}} " alt="">
+                                <p class="float-right user-oder" style="display:inline-block">Người gửi:</p>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">Họ tên người gửi <span class="star-red">*</span></label>
+                                        <input type="text"
+                                        class="form-control" name="kh_hoten" id=""  style="width:60%"  value=" {{$khachhang->kh_hoten}} " disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">Tuyến xe <span class="star-red">*</span></label>
+                                        <input type="text"
+                                        class="form-control" name=""  style="width:60%" value=" {{$tuyen->t_tentuyen}} " disabled>
+                                        <input type="hidden"
+                                        class="form-control" name="t_id"   id="t_id"  value=" {{$tuyen->t_id}} ">
+                                        <input type="hidden"
+                                        class="form-control" name="cx_id"   id="t_id"  value=" {{$tuyen->cx_id}} ">
+                                    </div>
+                                </div> 
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">Hình thức gửi  <span class="star-red">*</span></label>
+                                    </div>                              
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="Send_Method" id="checkbox2" value="2" checked>
+                                            Gửi hàng tại kho hàng
+                                        </label>         
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="Send_Method" id="checkbox1" value="1"  > <span>Tại địa chỉ cụ thể</span> 
+                                      </label>
+                                    </div> 
+                                        <input type="text" class="form-control Address_items" name="method_value" id="autoUpdate1"   placeholder="Nhập địa điểm nơi cần lấy hàng....">
+                                        
+                                        <div class="Address_items" name="Send_Method" id="autoUpdate2"  style="border: 1px solid #ccc;padding: 10px;word-spacing: initial; ">{!!$tuyen->t_mota!!} </div>
+                                </div>                                
+                                <br/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+           <div style="overflow:auto;">
+                <div style="float:right;margin-right: 168px;">
+                    <button type="button" class="btn btn-default" id="prevBtn" onclick="nextPrev(-1)">Trở về</button>
+                    <button type="button" id="nextBtn" class="btn btn-success" onclick="nextPrev(1)">Tiếp theo</button>
+                </div>
+            </div> 
+        </div>
         
-      </div>
-    </div>
-  </div> --}}
+        
+        <!-- Circles which indicates the steps of the form: -->
+        <div class="col-md-12">
+            <div style="">
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+              </div>
+         </div>
+        
+        
+        </form>
+</div>
 @endsection
 @push('script')
 <script>
-    // Lấy dữ liệu Tỉnh - Quận - Huyện 
-    $('#Tinh').change(function (e) {
+  
+//  $('#hh_tienthuho').keyup(function (e) { 
+//      var num = $(this).val();
+//     // console.log(num);
+//     $.ajaxSetup({
+//         headers: {
+//                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//             }
+//         });
+//     $.ajax({
+//         type: "post",
+//         url: " {{route('kh-ql-don-formart-number')}} ",
+//         data: {num:num},
+//         dataType: "json",
+//         success: function (response) {
+//             // console.log(response);
+//             // $('#hh_tienthuho').val();
+//             // $('#hh_tienthuho').val(response);
+//         }
+//     });
+
+//  });
+
+
+</script>
+
+
+<script>
+window.onload = function() {
+  //Check File API support
+  if (window.File && window.FileList && window.FileReader) {
+    var filesInput = document.getElementById("files");
+    filesInput.addEventListener("change", function(event) {
+      var files = event.target.files; //FileList object
+      var output = document.getElementById("result");
+      for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        //Only pics
+        if (!file.type.match('image'))
+          continue;
+        var picReader = new FileReader();
+        picReader.addEventListener("load", function(event) {
+          var picFile = event.target;
+          var div = document.createElement("div");
+          div.innerHTML = "<div><img class='TuyChinhImg' src='" + picFile.result + "'" +
+            "title='" + picFile.name + "'/></div> ";
+          output.insertBefore(div, null);
+        });
+        //Read the image
+        picReader.readAsDataURL(file);
+      }
+    });
+  } else {
+    console.log("Your browser does not support File API");
+  }
+}
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaaygZT7_LyyyK1fE9Wf9nsBHfJXgzXXY&libraries=places&callback=initMap"
+    
+    ></script>
+<script>
+   
+   
+
+    // Ggoogle map
+    function initMap() {
+
+        const directionsService = new google.maps.DirectionsService();
+        const directionsRenderer = new google.maps.DirectionsRenderer();
+      
+       
+        // console.log('phung');
+        //Khoang cach
+        // const geocoder = new google.maps.Geocoder();
+        const service = new google.maps.DistanceMatrixService();
+
+
+        const autocomplete = new  google.maps.places.Autocomplete(document.getElementById('getPlace'));
+
+        autocomplete.addListener('place_changed',function(){
+        const add = document.getElementById('getPlace').value;
+        place = autocomplete.getPlace();
+        b=place;
+        // map.setCenter(place.geometry.location);
+        a=place.geometry.location;
+        // map.fitBounds(place.geometry.viewport);
+        // map.setZoom(16);
+        // marker.setPosition(place.geometry.location);
+        // console.log(a);
+        getaddress(add);
+        
+      });
+      
+     function getaddress(add)
+     {
+        var t_id =$('#t_id').val();
+        console.log(t_id);
+        $.ajax({
+            type: "get",
+            url: "http://localhost:8080/chanhxe/public/khach-hang/lap-don-hang/kho/"+t_id,
+            dataType: "json",
+            success: function (response) {
+                console.log(response.k_diachi);
+                calculateAndDisplayRoute(response.k_diachi,add)
+            }
+        });
+     }
+
+     function calculateAndDisplayRoute(add1,add2) {
+            directionsService.route(
+                {
+                origin: {lat:10.022678823009876 ,lng:105.75530472479245},
+                destination:{lat:10.022678823009876 ,lng:105.75530472479245},
+                travelMode: google.maps.TravelMode.DRIVING,
+                },
+                (response, status) => {
+                if (status === "OK") {
+                    directionsRenderer.setDirections(response);
+                    console.log(response);
+                    //tinh khoang cach
+                    service.getDistanceMatrix(
+                    {
+                        origins: [add1],
+                        destinations: [add2],
+                        travelMode: google.maps.TravelMode.DRIVING,
+                    },
+                    (response, status) => {
+                        if (status !== "OK") {
+                            $('#getPlace').removeClass('CheckGG');
+                            $('#getPlace').addClass('DontCheckGG');
+                        alert("Error was: " + status);
+
+                        }
+                        else{
+                        var originList=response.originAddresses;
+                        var destinationAddresses=response.destinationAddresses;
+                        var dt ;
+                        var dr ;
+                        $('#getPlace').removeClass('DontCheckGG');
+                        $('#getPlace').addClass('CheckGG');
+                        for (let i = 0; i < originList.length; i++) {
+                            const results = response.rows[i].elements;
+                                console.log(results);
+
+                            for (let j = 0; j < results.length; j++) {
+                                var element = results[j];
+                                    dt =element.distance.text;
+                                    dr =element.duration.text;
+                                
+                            }
+                        } 
+                        // console.log(dt + dr);
+                        $('#kh_nhan_km').val(dt);
+                        $('#kh_nhan_tgchay').val(dr);
+                        }
+                    } 
+                    );
+
+
+                } else {
+                    window.alert("Directions request failed due to " + status);
+                }
+                }
+            );
+        }
+
+
+
+    
+     
+        
+      
+    }//end map
+   
+    
+
+
+
+
+ // Lấy dữ liệu Tỉnh - Quận - Huyện 
+ $('#Tinh').change(function (e) {
         e.preventDefault();
         var getID = $(this).children("option:selected").val();
         // console
@@ -295,7 +530,7 @@
                         url: "http://localhost:8080/chanhxe/public/phuong/" + getIDQuanHuyen + "/phuong-xa",
                         dataType: "json",
                         success: function (response) {
-                            console.log(response);
+                            // console.log(response);
                             $('.value-px').remove();
                             console.log(response);
                             $('#phuongXa').removeAttr("disabled");
@@ -304,7 +539,7 @@
                                 $('#phuongXa').append('<option class="value-px" disabled>Không có dữ liệu</option>');
                             }
                             for (let i = 0; i < response.length; i++) {
-                                console.log(response[i].p_ten);
+                                // console.log(response[i].p_ten);
                                 $('#phuongXa').append('<option class="value-px" value="' + response[i].p_id + '" >' + response[i].p_ten + '</option>');
                             }
                         }
@@ -367,65 +602,104 @@
 
     });
 
-
-    // Ggoogle map
-    function initMap() {
-
-        const autocomplete = new  google.maps.places.Autocomplete(document.getElementById('getPlace'));
-        autocomplete.addListener('place_changed',function(){
-        const place = autocomplete.getPlace();
-        // map.setCenter(place.geometry.location);
-        a=place.geometry.location;
-        // map.fitBounds(place.geometry.viewport);
-        // map.setZoom(16);
-        // marker.setPosition(place.geometry.location);
-        console.log(a);
-       
-        
-      });
-    }
-    // var x = document.getElementById("demo");
-    // if (navigator.geolocation) {
-    // navigator.geolocation.getCurrentPosition(showPosition);
-    // } else {
-    // x.innerHTML = "Geolocation không được hỗ trợ bởi trình duyệt này.";
-    // }
-
-    // function showPosition(position) {
-    // x.innerHTML = "Vĩ độ: " + position.coords.latitude +
-    // "<br>Kinh độ: " + position.coords.longitude;
-    // }
-
-
-    // $('#ChanhXe').focus(function (e) { 
-    //     e.preventDefault();
-    //     // console.log('đã focus');
-    //     $('.modal').modal('show');
-    //     var idp= document.getElementById('Tinh').value;
-    //     // console.log(idp);
-    //     $.ajaxSetup({
-    //     headers: {
-    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //         }
-    //     });
-
-    //     $.ajax({
-    //         type: "POST",
-    //         url: " {{route('lay-chanh-xe')}}",
-    //         data: {id:idp},
-    //         dataType: "json",
-    //         success: function (response) {
-    //             console.log(response);
-    //             $('.ShowChanhXe').append('');
-    //             for(let i=0; i< response.length ; i++)
-    //             {
-    //                 console.log(response[i].cx_tenchanhxe);
-    //                 $('.ShowChanhXe').append('<div class="row">  <div class="col-xs-9"><h5>'+ response[i].cx_tenchanhxe +'</h5><span><a href="#" class="small"> katy Perry</a></span></div>   <div class="col-xs-3"> <a class="dir-like" href="#"> <span class="small">434</span>   <i class="fa fa-heart"></i></a> </div>  </div>');  
-                        
-    //             }
-    //         }
-    //     });
-
-    // });
+    $(document).ready(function () {
+            $('#autoUpdate2').show();
+            $('#autoUpdate1').hide();
+        $('#checkbox1').change(function(){
+        if(this.checked)
+            {
+                $('#autoUpdate2').hide();
+                $('#autoUpdate1').show();
+            }
+        else
+            $('#autoUpdate1').hide();
+        });
+        $('#checkbox2').change(function(){
+        if(this.checked)
+            {
+                $('#autoUpdate1').hide();
+            $('#autoUpdate2').show();
+            }
+        else
+            $('#autoUpdate2').hide();
+        });
+    });
 </script>
+<script>
+    var currentTab = 0; // Current tab is set to be the first tab (0)
+showTab(currentTab); // Display the current tab
+
+function showTab(n) {
+  // This function will display the specified tab of the form ...
+  var x = document.getElementsByClassName("tab");
+  x[n].style.display = "block";
+  // ... and fix the Previous/Next buttons:
+  if (n == 0) {
+    document.getElementById("prevBtn").style.display = "none";
+  } else {
+    document.getElementById("prevBtn").style.display = "inline";
+  }
+  if (n == (x.length - 1)) {
+    document.getElementById("nextBtn").innerHTML = "Lưu";
+  } else {
+    document.getElementById("nextBtn").innerHTML = "Tiếp theo";
+  }
+  // ... and run a function that displays the correct step indicator:
+  fixStepIndicator(n)
+}
+
+function nextPrev(n) {
+  // This function will figure out which tab to display
+  var x = document.getElementsByClassName("tab");
+  // Exit the function if any field in the current tab is invalid:
+  if (n == 1 && !validateForm()) return false;
+  // Hide the current tab:
+  x[currentTab].style.display = "none";
+  // Increase or decrease the current tab by 1:
+  currentTab = currentTab + n;
+  // if you have reached the end of the form... :
+  if (currentTab >= x.length) {
+    //...the form gets submitted:
+    document.getElementById("Submit_HH").submit();
+    return false;
+  }
+  // Otherwise, display the correct tab:
+  showTab(currentTab);
+}
+
+function validateForm() {
+  // This function deals with validation of the form fields
+  var x, y, i, valid = true;
+  x = document.getElementsByClassName("tab");
+  y = x[currentTab].getElementsByTagName("input");
+  // A loop that checks every input field in the current tab:
+  for (i = 0; i < y.length; i++) {
+    // If a field is empty...
+    // if (y[i].value == "") {
+      // add an "invalid" class to the field:
+    //   y[i].className += " invalid";  
+      // and set the current valid status to false:
+    //   valid = false;
+    // }
+  }
+  // If the valid status is true, mark the step as finished and valid:
+  if (valid) {
+    document.getElementsByClassName("step")[currentTab].className += " finish";
+  }
+  return valid; // return the valid status
+}
+
+function fixStepIndicator(n) {
+  // This function removes the "active" class of all steps...
+  var i, x = document.getElementsByClassName("step");
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" active", "");
+  }
+  //... and adds the "active" class to the current step:
+  x[n].className += " active";
+}
+
+
+</script>
+
 @endpush

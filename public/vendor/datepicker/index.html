@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Date range picker sample</title>
+    <link href="datepicker/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="datepicker/css/datepicker.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container" style="padding-top:20px">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        Date range picker sample
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr>
+                                <td>Check In:</td>
+                                <td>
+                                    <input type="text" id="timeCheckIn" class="form-control" />
+                                </td>
+                                <td>Check Out:</td>
+                                <td>
+                                    <input type="text" id="timeCheckOut" class="form-control" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="datepicker/js/jquery.min.js"></script>
+    <script src="datepicker/js/bootstrap.min.js"></script>
+    <script src="datepicker/js/bootstrap-datepicker.js"></script>
+    <script>
+        $(function () {
+            'use strict';
+            var nowTemp = new Date();
+            var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+            var checkin = $('#timeCheckIn').datepicker({
+                onRender: function (date) {
+                    return date.valueOf() < now.valueOf() ? 'disabled' : '';
+                }
+            }).on('changeDate', function (ev) {
+                if (ev.date.valueOf() > checkout.date.valueOf()) {
+                    var newDate = new Date(ev.date)
+                    newDate.setDate(newDate.getDate() + 1);
+                    checkout.setValue(newDate);
+                }
+                checkin.hide();
+                $('#timeCheckOut')[0].focus();
+            }).data('datepicker');
+            var checkout = $('#timeCheckOut').datepicker({
+                onRender: function (date) {
+                    return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+                }
+            }).on('changeDate', function (ev) {
+                checkout.hide();
+            }).data('datepicker');
+        });
+    </script>
+</body>
+</html>

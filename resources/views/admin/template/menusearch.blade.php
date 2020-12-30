@@ -5,51 +5,36 @@
     <!--toggle button end-->
 
     <!--search start-->
-    <form class="searchform" action="" method="post">
+    {{-- <form class="searchform" action="" method="post">
         <input type="text" class="form-control" name="keyword" placeholder="Tìm kiếm..." />
-    </form>
+    </form> --}}
     <!--search end-->
 
     <!--notification menu start -->
     <div class="menu-right">
         <ul class="notification-menu">
-            <li>
-                <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
-                    <i class="fa fa-envelope-o"></i>
-                    <span class="badge">5</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-head pull-right">
-                    <h5 class="title">G-mail  </h5>
-                    <ul class="dropdown-list normal-list">
-                        <li class="new">
-                            <a href="#">
-                                {{-- <span class="thumb"><img src="images/photos/user1.png" alt="" /></span> --}}
-                                <span class="desc">
-                                  <span class="name">John Doe <span class="badge badge-success">new</span></span>
-                                  <span class="msg">Lorem ipsum dolor sit amet...</span>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
-                    <i class="fa fa-bell-o"></i>
-                    <span class="badge">4</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-head pull-right">
-                    <h5 class="title">Thông báo</h5>
-                    <ul class="dropdown-list normal-list">
-                        <li class="new">
-                            <a href="#">
-                                <span class="label label-danger"><i class="fa fa-bolt"></i></span>
-                                <span class="name">Server #1 overloaded.  </span>
-                                <em class="small">34 mins</em>
-                            </a>
-                        </li>
-                </div>
-            </li>
+           @if (auth::guard('chanhxe')->check())
+           <li>
+            <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
+                <i class="fa fa-bell-o"></i>
+                <span class="badge" id="SoThongbao">  {{count($Neworder)}} </span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-head pull-right">
+                <h5 class="title">Thông báo</h5>
+                <ul class="dropdown-list normal-list" id="NoiDungThongBao">
+                  @foreach ($Neworder as $item)
+                    <li class="new">
+                        <a href="{{ route('cx-ql-don-hang-thong-bao', ['ctdvc_id'=>$item->ctdvc_id,'dvc_id'=>$item->dvc_id]) }}" >
+                            <span class="label label-danger"><i class="fa fa-bolt"></i></span>
+                            <span class="name">Đơn mới từ <strong> {{$item->kh_hoten}} </strong></span>
+                            <em class="small"> {{\Carbon\Carbon::parse($item->dvc_ngaylap)->diffForHumans($thoigianhientai) }} </em>
+                        </a>
+                    </li>
+                  @endforeach
+                </ul>
+            </div>
+        </li>
+           @endif
             <li>
                 @if (auth::guard('khachhang')->check())
                     <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -70,10 +55,10 @@
                     </ul>
                 @elseif(auth::guard('chanhxe')->check())
                     <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        @if (Auth::guard('chanhxe')->user()->kh_hinhanh == null)
+                        @if (Auth::guard('chanhxe')->user()->cx_hinhanh == null)
                         <img src="{{asset('upload/khachhang/user-placeholder.png')}}" alt="" > 
                         @endif
-                        <img src="{{asset('upload/chanhxe/'.Auth::guard('chanhxe')->user()->kh_hinhanh)}}" alt="" />
+                        <img src="{{asset('upload/chanhxe/'.Auth::guard('chanhxe')->user()->cx_hinhanh)}}" alt="" />
                         {{Auth::guard('chanhxe')->user()->cx_hoten}}
                         <span class="caret"></span>
                     </a>

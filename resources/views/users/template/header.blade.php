@@ -6,8 +6,8 @@
                     <div class="row align-items-center">
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo">
-                                <a href="">
-                                    <img src="{{asset('vendor/users/images/logo/1.png')}}" alt="" style="width:80; height: 80px;">
+                                <a href="{{ route('trang-chu-khach-hang') }}">
+                                    <img src="{{asset('vendor/users/images/logo/3.png')}}" alt="" >
                                     {{-- <span>Chành Xe</span> --}}
                                 </a>
                             </div>
@@ -16,12 +16,12 @@
                             <div class="main-menu  d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a class="active" href="index.html">Trang chủ</a></li>
-                                        <li><a href="about.html">Dịch vụ</a></li>
+                                        <li><a href="{{ route('trang-chu-khach-hang') }}" class="active" href="index.html">Trang chủ</a></li>
+                                        <li><a href="#">Dịch vụ</a></li>
                                         <li><a href="#">Tin tức <i class="ti-angle-down"></i></a>
                                             <ul class="submenu">
-                                                    <li><a href="destination_details.html">a</a></li>
-                                                    <li><a href="elements.html">b</a></li>
+                                                    <li><a href="#">a</a></li>
+                                                    <li><a href="#">b</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="contact.html">Liên hệ</a></li>
@@ -38,13 +38,14 @@
                                 <div class="social_links d-none d-xl-block">
                                     <ul>
                                         @if (Auth::guard('khachhang')->check())
-                                            <li><a href="{{ route('kh-dashboard') }}" ><i class="fa fa-user"></i> Khách Hàng</a></li>
-                                            <li><a href="{{ route('logout-khachhang') }}" ><i class="fa fa-user"></i>Đăng xuất</a></li>
+                                            <li><a href="{{ route('kh-dashboard') }}" ><i class="fa fa-user"></i>&nbsp; {{Auth::guard('khachhang')->user()->kh_hoten}} </a></li>
+                                            <li><a href="{{ route('logout-khachhang') }}" ><i class="fa fa-sign-out"></i>&nbsp; Đăng xuất</a></li>
                                         @elseif(Auth::guard('chanhxe')->check())
-                                        <li><a href="{{ route('cx-dashboard') }}" ><i class="fa fa-user"></i> Chành xe</a></li>
+                                        {{-- <li><a href="{{ route('cx-dashboard') }}" ><i class="fa fa-user"></i> {{Auth::guard('chanhxe')->user()}}</a></li> --}}
+                                        <li><a href="{{ route('logout-chanhxe') }}" ><i class="fa fa-sign-out"></i>&nbsp; Đăng xuất</a></li>
                                         @else
 
-                                        <li><a href="{{ route('dang-nhap') }}" ><i class="fa fa-user"></i> Đăng nhập</a></li>
+                                        <li><a href="{{ route('dang-nhap') }}" ><i class="fa fa-sign-in"></i> &nbsp;Đăng nhập</a></li>
                                         @endif
                                     </ul>
                                 </div>

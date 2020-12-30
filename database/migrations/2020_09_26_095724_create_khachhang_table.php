@@ -20,7 +20,7 @@ class CreateKhachhangTable extends Migration
             $table->string('kh_hinhanh',199)->nullable();
             $table->string('kh_diachi',199)->nullable();
             $table->string('code')->nullable();
-            $table->tinyInteger('activate')->default(0);
+            $table->tinyInteger('active')->default(0);
             $table->string('username');
             $table->string('password');
             $table->rememberToken();

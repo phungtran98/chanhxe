@@ -5,8 +5,19 @@
 </li>
 @endsection
 @section('settings')
+@if (Session::has('OTPS'))
+<div class="alert alert-success" role="alert">
+    {{ Session::get('OTPS') }}
+  </div>
+@elseif(Session::has('OTPF'))
+    <div class="alert alert-danger" role="alert">
+        {{ Session::get('OTPF') }}
+    </div>
+@endif
 <div class="container">
-    <div class="row info-acc">
+    {{-- {{dd(Session::get('OTPS'))}} --}}
+  
+    <div class="row info-acc" style="width: 65%; margin: auto;">
         <form action="{{ route('kh-cai-dat-cap-nhat') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="col-md-12 ">

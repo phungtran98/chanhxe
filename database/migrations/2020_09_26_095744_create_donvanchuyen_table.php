@@ -15,11 +15,16 @@ class CreateDonvanchuyenTable extends Migration
     {
         Schema::create('donvanchuyen', function (Blueprint $table) {
             $table->bigIncrements('dvc_id');
-            $table->date('dvc_ngaylap');
+            $table->bigInteger('dvc_madon');
+            $table->dateTime('dvc_ngaylap');
+            $table->integer('dvc_thongbao');
+            $table->string('dvc_hinhthucgui');
             
             $table->bigInteger('kh_id')->unsigned();
             $table->foreign('kh_id')->references('kh_id')->on('khachhang')->onDelete('CASCADE');
-
+            $table->bigInteger('cx_id')->unsigned();
+            $table->foreign('cx_id')->references('cx_id')->on('chanhxe')->onDelete('CASCADE');
+           
             $table->timestamps();
         });
     }
