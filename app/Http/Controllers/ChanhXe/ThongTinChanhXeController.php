@@ -35,7 +35,9 @@ class ThongTinChanhXeController extends Controller
         //Lấy bình luận của chành xe
         $binhluan = DB::table('binhluan as bl')
         ->join('khachhang as kh','kh.kh_id','bl.kh_id')
-        ->where('cx_id',$id)->get();
+        ->join('chanhxe as cx','cx.cx_id','bl.cx_id')
+        ->where('cx.cx_id',$id)->get();
+        // dd($binhluan);
         $rate=0;
         $count=0;
         $star[0]=0;

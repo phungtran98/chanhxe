@@ -87,7 +87,7 @@ class DonHangController extends Controller
                 $dai= $request->dai;
                 $rong= $request->rong;
                 $cao= $request->cao;
-                $data = number_format(($dai * $rong * $cao)/8000,1);
+                $data = number_format(($dai * $rong * $cao)/3000,1);
     
                 return response()->json($data, 200);
             }

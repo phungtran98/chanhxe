@@ -16,6 +16,7 @@ class TaiXeController extends Controller
     public function index()
     {
         $taixe = DB::table('taixe')->where('cx_id',Auth::guard('chanhxe')->id())->get();
+
         
         return view('admin.pages.chanhxe.quanlitaixe.index',compact('taixe'));
     }
@@ -28,7 +29,7 @@ class TaiXeController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        dd($request->all());
         if($request->file('tx_hinhanh') && $request->file('tx_vanbang')){
            
             $taixe['tx_hoten'] =$request->tx_hoten;

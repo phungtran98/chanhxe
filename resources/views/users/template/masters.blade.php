@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="shortcut icon" href=" {{asset('vendor/users/images/logo/1.png')}} " type="image/png">
     <title>Chành Xe |@stack('title')</title>
     <meta name="description" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">

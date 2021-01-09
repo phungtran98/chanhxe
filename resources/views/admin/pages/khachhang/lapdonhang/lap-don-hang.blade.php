@@ -206,7 +206,7 @@ input#checkbox1,input#checkbox2 {
                             <div class="form-group">
                                 <label for="phone">Số điện thoại <span class="star-red">*</span></label>
                                 <input type="text"
-                                class="form-control" style="width:55%" name="kh_nhan_sdt" id="phone"  placeholder="0123456789">
+                                class="form-control" style="width:55%" name="kh_nhan_sdt" id="Phone"  placeholder="0123456789">
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -316,32 +316,7 @@ input#checkbox1,input#checkbox2 {
 </div>
 @endsection
 @push('script')
-<script>
-  
-//  $('#hh_tienthuho').keyup(function (e) { 
-//      var num = $(this).val();
-//     // console.log(num);
-//     $.ajaxSetup({
-//         headers: {
-//                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//             }
-//         });
-//     $.ajax({
-//         type: "post",
-//         url: " {{route('kh-ql-don-formart-number')}} ",
-//         data: {num:num},
-//         dataType: "json",
-//         success: function (response) {
-//             // console.log(response);
-//             // $('#hh_tienthuho').val();
-//             // $('#hh_tienthuho').val(response);
-//         }
-//     });
 
-//  });
-
-
-</script>
 
 
 <script>

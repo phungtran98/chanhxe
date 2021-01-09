@@ -2051,12 +2051,12 @@ select {
 .cm-logo img {
 	/* margin-bottom: 30px; */
 	margin-left: 50px;
-	margin-top: -80px;
+	margin-top: -120px;
 }
-#title-logo {
+.title-logo {
 	font-size: 25px;
 	font-weight: 700;
-	line-height: 54px;
+	line-height: 35px;
 	color: #007d74;
 	float: left;
 	width: 100%;
@@ -2064,7 +2064,7 @@ select {
 	text-align: center;
 	text-transform: uppercase;
 	/* width: 300px; */
-	margin-left: 25px;
+	margin-left: 20px;
 }
 .cmp-info > img {
 	width: 100%;

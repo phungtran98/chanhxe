@@ -29,6 +29,7 @@ class BinhLuanController extends Controller
        $data = [];
        $data['bl_noidung'] = $request->bl_noidung;
        $data['cx_id'] = $request->cx_id;
+       $data['cx_rep'] = 0;
        $data['kh_id'] = Auth::guard('khachhang')->id();
        $data['bl_danhgia'] = $request->bl_danhgia;
 
@@ -51,6 +52,7 @@ class BinhLuanController extends Controller
        $data = [];
        $data['bl_noidung'] = $request->bl_noidung;
        $data['cx_id'] = $request->cx_id;
+       $data['cx_rep'] = 0;
        $data['kh_id'] = Auth::guard('khachhang')->id();
        $data['bl_idtraloi'] = $id;
 

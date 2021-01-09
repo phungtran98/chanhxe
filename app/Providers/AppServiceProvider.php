@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
         $taixeShare = DB::table('taixe')->get();
         View::share('taixeShare',$taixeShare);
 
-
+        // dd(Auth::guard('chanhxe')->id());
 
         Carbon::setLocale('vi');
         $thoigianhientai = Carbon::now();
@@ -42,8 +42,10 @@ class AppServiceProvider extends ServiceProvider
         ->join('chitietdonvanchuyen as ctdvc','ctdvc.dvc_id','dvc.dvc_id')
         ->join('khachhang as kh','kh.kh_id','dvc.kh_id')
         ->where('dvc.dvc_thongbao','=',0)
+        ->where('dvc.dvc_thongbao','=',0)
         ->orderBy('dvc.dvc_id','DESC')
         ->get();
+        // dd($Neworder);
         View::share('Neworder',$Neworder);
         View::share('thoigianhientai',$thoigianhientai);
 

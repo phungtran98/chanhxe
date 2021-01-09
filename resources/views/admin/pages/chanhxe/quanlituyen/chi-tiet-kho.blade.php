@@ -152,8 +152,6 @@
             
         });
         
-      
-
         //Lấy địa điểm trên Map
         const autocomplete = new  google.maps.places.Autocomplete(document.getElementById('start'));
         autocomplete.addListener('place_changed',function(){

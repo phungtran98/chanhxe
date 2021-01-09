@@ -41,23 +41,19 @@ div#current-loaction{
   </head>
   <body>
       {{-- autocomplte --}}
-      {{-- <input class="form-control" type="text" name="" id="auto_search"> --}}
-      
-      <div id="map"></div>
+      <input class="form-control" type="text" name="" id="auto_search">
+      <a href="#" id="ChiDuong"> click here</a>
+      <div id="map" style="width: 600px"; ></div>
       <div class="control-left-wrapper">
         <div class="zoom" id="zoom-in"> <i class="fa fa-plus" aria-hidden="true"></i> </div>
         <div class="zoom" id="zoom-out"><i class="fa fa-minus" aria-hidden="true"></i></div>
         <div class="zoom" id="current-loaction"><i class="fa fa-paper-plane" aria-hidden="true"></i></div>
       </div>
-
+{{-- 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaaygZT7_LyyyK1fE9Wf9nsBHfJXgzXXY&libraries=places&callback=initMap"
-    
-    ></script>
-    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> --}}
+ 
     <script>
     "use strict";
     let map, marker;
@@ -206,40 +202,40 @@ div#current-loaction{
                 directionsRenderer.setDirections(response);
                 console.log(response);
                  //tinh khoang cach
-                 service.getDistanceMatrix(
-                  {
-                    origins: ['Vinh long'],
-                    destinations: [newMarker.getPosition()],
-                    travelMode: google.maps.TravelMode.DRIVING,
-                  },
-                  (response, status) => {
-                    if (status !== "OK") {
-                      alert("Error was: " + status);
+                //  service.getDistanceMatrix(
+                //   {
+                //     origins: ['Vinh long'],
+                //     destinations: [newMarker.getPosition()],
+                //     travelMode: google.maps.TravelMode.DRIVING,
+                //   },
+                //   (response, status) => {
+                //     if (status !== "OK") {
+                //       alert("Error was: " + status);
 
-                    }
-                    else{
-                      var originList=response.originAddresses;
-                      var destinationAddresses=response.destinationAddresses;
-                      for (let i = 0; i < originList.length; i++) {
-                          const results = response.rows[i].elements;
-                            console.log(results);
+                //     }
+                //     else{
+                //       var originList=response.originAddresses;
+                //       var destinationAddresses=response.destinationAddresses;
+                //       for (let i = 0; i < originList.length; i++) {
+                //           const results = response.rows[i].elements;
+                //             console.log(results);
 
-                          for (let j = 0; j < results.length; j++) {
-                            var element = results[j];
-                            var dt =element.distance.text;
-                            var dr =element.duration.text;
-                            console.log(dt + dr);
-                          }
-                      } 
-
-
+                //           for (let j = 0; j < results.length; j++) {
+                //             var element = results[j];
+                //             var dt =element.distance.text;
+                //             var dr =element.duration.text;
+                //             console.log(dt + dr);
+                //           }
+                //       } 
 
 
 
 
-                    }
-                  } 
-                 );
+
+
+                //     }
+                //   } 
+                //  );
 
 
 
@@ -261,13 +257,23 @@ div#current-loaction{
       
       
 
-      calculateAndDisplayRoute(marker);
+      // calculateAndDisplayRoute(marker);
+
       ZoomControl();
       GeolocationControl();
+
+      
+      function ChiDuong()
+      {
+        GeolocationControl();
+      }
       
     } //end intMap   
     
     </script>
+       <script async defer
+       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaaygZT7_LyyyK1fE9Wf9nsBHfJXgzXXY&libraries=places&callback=initMap"></script>
+       
   </body>
 </html>
 

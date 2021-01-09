@@ -182,7 +182,7 @@
                                 </div>
                                 {{-- hiện thị trả lời bình luận --}}
                                 @foreach ($binhluan as $bl2)
-                                        @if ($bl->bl_id == $bl2->bl_idtraloi)
+                                        @if ($bl->bl_id == $bl2->bl_idtraloi && $bl2->cx_rep==0)
                                             <div class="comment-list reppcmt">
                                                 <div class="single-comment justify-content-between d-flex">
                                                     <div class="user justify-content-between d-flex">
@@ -243,8 +243,8 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <button type="submit" class="button button-contactForm btn_1 boxed-btn" id="BinhLuanCX">Bình luận</button>
-                                    <span id="ThongBaoBL" style="color: red"></span>
                                 </div>
+                                <span id="ThongBaoBL" style="color: red"></span>
                             </div>
                     </div>
                     
@@ -462,9 +462,12 @@
 
 $(document).ready(function () {
 
-    var kh_id = $('#checkId').val();
-    // console.log(kh_id);
-    //kiểm tra khách hàng đó có lập đơn nào hay chưa
+    var kh_id=0;
+     kh_id = $('#checkId').val();
+    console.log(kh_id);
+    if( kh_id !=0 )
+    {
+        //kiểm tra khách hàng đó có lập đơn nào hay chưa
     $.ajaxSetup({
         headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -491,6 +494,14 @@ $(document).ready(function () {
         }
     });
 
+    }
+    else
+    {
+        $('#BinhLuanCX').attr('disabled','true');
+        $('#BinhLuanCX').addClass('CheckOrder');
+        $('#ThongBaoBL').append('Bạn không được bình luận do bạn chưa đăng nhập hoặc chưa có lập đơn hàng nào !')
+    }
+    
   
 
 

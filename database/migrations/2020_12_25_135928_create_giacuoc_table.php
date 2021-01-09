@@ -15,9 +15,7 @@ class CreateGiacuocTable extends Migration
     {
         Schema::create('giacuoc', function (Blueprint $table) {
             $table->bigIncrements('gc_id');
-            $table->integer('gc_khoiluong');
-            $table->integer('gc_kichthuoc');
-            $table->integer('gc_gia');
+            $table->integer('gc_gia')->default(300);
             $table->timestamps();
         });
     }

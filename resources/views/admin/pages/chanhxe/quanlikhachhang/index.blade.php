@@ -24,7 +24,7 @@
         <div class="col-md-6 col-sm-6">
             <div class="panel">
                 <div class="panel-body">
-                    <h4 style="font-weight:bold"> {{$item->kh_hoten}} </h4>
+                    <h4 style="font-weight:bold"> <a href="{{ route('cx-ql-don-tim-kiem-khach-hang', ['id'=>$item->kh_id]) }}">{{$item->kh_hoten}}</a>  </h4>
                     <div class="media">
                         <a class="pull-left" href="#">
                             <img class="thumb media-object" src="{{asset('vendor/admin/images/photos/user1.png')}}" alt="">

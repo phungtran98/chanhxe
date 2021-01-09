@@ -18,6 +18,7 @@ class ChanhXeController extends Controller
     {
         $donTong=0;
         $donDaGiao=0;
+        $donDangGiao=0;
         $donHuy=0;
         $donChoDuyet=0;
         $don = DB::table('chitietdonvanchuyen')->get();
@@ -36,10 +37,14 @@ class ChanhXeController extends Controller
             {
                 $donHuy+=1;
             }
+            if($val->ctdvc_trangthaidon == 2)
+            {
+                $donDangGiao+=1;
+            }
         }
 
   
-        return view('admin.pages.chanhxe.index',compact('donChoDuyet','donDaGiao','donHuy','donTong'));
+        return view('admin.pages.chanhxe.index',compact('donChoDuyet','donDaGiao','donHuy','donTong','donDangGiao'));
     }
 
     /**

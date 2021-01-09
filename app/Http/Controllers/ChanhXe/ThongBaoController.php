@@ -34,6 +34,8 @@ class ThongBaoController extends Controller
     //Cập nhật lại trang thái của thông báo 
     public function CapNhatThongBao($id,$dvc_id)
     {
+        $gia = DB::table('giacuoc')->first();
+        $cuoc = $gia->gc_gia;
         DB::table('donvanchuyen')->where('dvc_id',$dvc_id)->update([
             'dvc_thongbao'=>1
         ]);
@@ -50,7 +52,7 @@ class ThongBaoController extends Controller
         ->join('chanhxe as cx','cx.cx_id','x.cx_id')
         ->where('ctdvc_id',$id)->first();
         //   dd($ctdvc);
-        return view('admin.pages.chanhxe.quanlidondathang.chi-tiet-don-hang',compact('ctdvc','hinhanh'));
+        return view('admin.pages.chanhxe.quanlidondathang.chi-tiet-don-hang',compact('ctdvc','hinhanh','cuoc'));
     }
 
     /**

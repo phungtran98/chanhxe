@@ -18,9 +18,7 @@ class CreateChanhxeTable extends Migration
             $table->string('cx_tenchanhxe',199);
             $table->string('cx_hoten',199);
             $table->string('cx_hinhanh',199)->nullable();
-            $table->string('cx_gioitinh',4)->nullable();
             $table->string('cx_sdt',10)->nullable();
-            $table->string('cx_cmnd',199)->nullable();
             $table->string('cx_giayphep',199)->nullable();
             $table->text('cx_mota',199)->nullable();
             $table->string('cx_masothue',199)->nullable();

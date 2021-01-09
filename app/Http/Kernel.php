@@ -63,6 +63,7 @@ class Kernel extends HttpKernel
         //tạo midlleware xong vào đây đăng kí
         'KhachHangMiddleware' => \App\Http\Middleware\KhachHangMiddleware::class,
         'ChanhXeMiddleware' => \App\Http\Middleware\ChanhXeMiddleware::class,
+        'AdminMiddleware' => \App\Http\Middleware\AdminMiddleware::class,
     ];
 
     /**

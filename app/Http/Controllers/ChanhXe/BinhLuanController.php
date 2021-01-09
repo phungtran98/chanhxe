@@ -54,12 +54,13 @@ class BinhLuanController extends Controller
 
     public function replystore(Request $request,$id)
     {
-        echo $id;
+        // echo $id;
         $data = [];
        $data['bl_noidung'] = $request->bl_noidung;
        $data['cx_id'] = Auth::guard('chanhxe')->id();
        $data['kh_id'] = $request->kh_id;
-       $data['bl_idtraloi'] = $id;
+       $data['cx_rep'] = Auth::guard('chanhxe')->id();
+       $data['bl_idtraloi'] = $request->kh_id;
     
         
       try{

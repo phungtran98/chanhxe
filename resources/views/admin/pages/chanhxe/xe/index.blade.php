@@ -63,7 +63,7 @@ tr.table_thead1 > td{
             </form>
         </div>
     </div>
-    <div class="row"><?php $i=1?>
+    <div class="row"><?php $ii=1?>
         <div class="col-md-12">
             <table id="example" class="table table-striped table-bordered" >
                 <thead>
@@ -80,7 +80,7 @@ tr.table_thead1 > td{
                     @foreach ($xe as $xe)
                     
                         <tr class="table_thead1">
-                            <td> {{ $i}} </td>
+                            <td> {{ $ii++ }} </td>
                             <td style="width:120px">
                                 <?php $str = explode('|',$xe->x_hinhanhxe) ?>
                                 @for ($i = 0; $i < count($str); $i++)
@@ -96,7 +96,7 @@ tr.table_thead1 > td{
                                 <a title="Xóa xe" class="btn btn-danger " href="{{ route('cx-xoa-xe', ['id'=>$xe->x_id]) }}"  onclick=" return Delete_car()">Xóa</a>
                             </td>
                         </tr>
-                        <?php $i=$i+1?>
+             
                     @endforeach
                 </thead>
                 <tbody>
@@ -138,7 +138,7 @@ tr.table_thead1 > td{
                       <label for=""><strong>Họ tên tài xế</strong>  <span class="star-red">*</span></label>
                       <select class="form-control" name="tx_id"  id="">
                         <option disabled selected>---Chọn tài xế---</option>
-                        @foreach ($taixeShare as $item)
+                        @foreach ($taixe as $item)
                             <option value=" {{$item->tx_id}} "> {{$item->tx_hoten}} </option>
                         @endforeach
                        

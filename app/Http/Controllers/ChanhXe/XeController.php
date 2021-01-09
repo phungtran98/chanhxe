@@ -25,8 +25,9 @@ class XeController extends Controller
         ->join('taixe as tx','tx.tx_id','x.tx_id')
         ->where('cx.cx_id', Auth::guard('chanhxe')->id())
         ->get();
+        $taixe = DB::table('taixe')->where('cx_id',Auth::guard('chanhxe')->id())->get();
         // dd($xe);
-        return view('admin.pages.chanhxe.xe.index',compact('xe','cx'));
+        return view('admin.pages.chanhxe.xe.index',compact('xe','cx','taixe'));
     }
 
     /**

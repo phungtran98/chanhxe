@@ -34,6 +34,11 @@ Route::get('/chi-tiet-tuyen/{id_tuyen}', 'KhachHang\KhachHangController@ChiTietT
 //khách hàng tra cứu đơn hàng
 Route::post('/tra-cuu-don-hang', 'KhachHang\TraCuuDonHangController@index')->name('kh.tra-cuu-don-hang');
 
+Route::post('/uoc-tinh-cuoc', 'KhachHang\TraCuuDonHangController@UocTinhPhi')->name('kh.uoc-tinh-phi');
+
+//tra cứu tuyến
+Route::post('/tra-cuu-tuyen', 'KhachHang\TraCuuDonHangController@TraCuuTuyen')->name('kh.tra-cuu-tuyen');
+
 //Sài chung cho chành xe và khách hàng
 Route::post('/chi-tiet-kho-map','ChanhXe\ChiTietKhoController@getKhoMap')->name('cx-chi-tiet-kho-map');
 
@@ -62,7 +67,48 @@ Route::post('dang-ky-chanh-xe','AuthController@RegisterChanhXe')->name('register
 Route::get('dang-xuat-chanh-xe','AuthController@LogoutChanhXe')->name('logout-chanhxe');
 
 
+//Đăng nhập của Admin hệ thống
+Route::get('dang-nhap-admin/','AuthController@LoginAdminIndex')->name('login-admin-index');
 
+Route::post('admin/','AuthController@LoginAdmin')->name('login-admin');
+
+
+//-------------Phần này của Admin hệ thống---------------------//
+Route::group(['prefix' => 'admin'], function () {
+
+    Route::group(['middleware' => ['AdminMiddleware']], function () {
+
+        Route::get('/','Admin\AdminconTroller@index')->name('admin-dashboard');
+
+        Route::get('/danh-sach-chanh-xe','Admin\DanhSachChanhXeController@index')->name('admin-ds-chanh-xe');
+
+        Route::get('/danh-sach-chanh-xe/{id}','Admin\DanhSachChanhXeController@ChiTiet')->name('admin-ds-chanh-xe-ct');
+
+        Route::get('/xac-thuc-chanh-xe/{id}','Admin\DanhSachChanhXeController@XacThuc')->name('admin-xac-thuc');
+        
+        Route::post('/tim-kiem','Admin\DanhSachChanhXeController@Search')->name('admin-ds-chanh-xe-search');
+        
+        //Thống kê doanh thu
+        Route::get('/thong-ke','Admin\DoanhThuController@index')->name('admin-thong-ke');
+
+        Route::post('/thong-ke','Admin\DoanhThuController@ThongKe')->name('admin-thong-ke-submit');
+
+        Route::post('/thong-ke-ajax','Admin\DoanhThuController@ThongKeAjax')->name('admin-thong-ke-ajax');
+
+        Route::post('/thong-ke-thong-tin','Admin\DoanhThuController@ThongKeInfo')->name('admin-info-cx');
+    
+
+        //Cập nhật giá cước
+        Route::get('/cap-nhat-gia-cuoc','Admin\GiaCuocController@index')->name('admin-gia-cuoc');
+
+        Route::post('/cap-nhat-gia-cuoc','Admin\GiaCuocController@store')->name('admin-gia-cuoc-submit');
+    
+        //Đăng xuất 
+        Route::get('/dang-xuat-admin','AuthController@LogoutAdmin')->name('logout-admin');
+
+    });
+
+});
 
 
 
@@ -198,12 +244,9 @@ Route::group(['prefix' => 'chanh-xe','middleware' => 'ChanhXeMiddleware'], funct
 
     Route::get('/dashboard', 'ChanhXe\ChanhXeController@AdminChanhXe')->name('cx-dashboard');
     
-
     // Quản lí khách hàng       
     Route::get('/quan-li-khach-hang', 'ChanhXe\QuanLiKhachHangController@index')->name('cx-quan-li-khach-hang');
 
-
-    
     //Quản lí đơn đặt hàng
     Route::get('/quan-li-don-dat-hang', 'ChanhXe\QuanLiDonDatHangController@index')->name('cx-quan-li-don-dat-hang'); 
     
@@ -214,8 +257,7 @@ Route::group(['prefix' => 'chanh-xe','middleware' => 'ChanhXeMiddleware'], funct
     Route::post('/quan-li-don-dat-hang/tim-kiem', 'ChanhXe\QuanLiDonDatHangController@TimKiem')->name('cx-ql-don-tim-kiem');
     // Route::get('/quan-li-don-dat-hang/chi-tiet-don-hang/in-don/{id}', 'ChanhXe\QuanLiDonDatHangController@InDonHang')->name('cx-ql-don-in-don');
 
-
-
+    
     // In hóa đơn của chành xe
     Route::get('/quan-li-don-dat-hang/chi-tiet-don-hang/in-don-word/{id}', 'ChanhXe\QuanLiDonDatHangController@InDonHang')->name('cx-ql-don-in-don-word');
     
@@ -228,6 +270,9 @@ Route::group(['prefix' => 'chanh-xe','middleware' => 'ChanhXeMiddleware'], funct
     Route::post('/quan-li-don-dat-hang/tim-kiem-noi-dung', 'ChanhXe\QuanLiDonDatHangController@FindContent')->name('cx-ql-don-hang-tim-kiem-noi-dung');
     
     Route::post('/quan-li-don-dat-hang/tim-kiem-ngay-lap', 'ChanhXe\QuanLiDonDatHangController@FindDate')->name('cx-ql-don-tim-kiem-ngay-lap');
+    
+    // quản lí khách hàng tìm đơn theo từng khách hàng
+    Route::get('/quan-li-don-dat-hang/tim-kiem/{kh_id}', 'ChanhXe\QuanLiDonDatHangController@FindKhachHang')->name('cx-ql-don-tim-kiem-khach-hang');
 
     //Thông báo trên thanh menu search
     Route::get('/thong-bao/{ctdvc_id}/{dvc_id}', 'ChanhXe\ThongBaoController@CapNhatThongBao')->name('cx-ql-don-hang-thong-bao');
@@ -314,13 +359,14 @@ Route::group(['prefix' => 'chanh-xe','middleware' => 'ChanhXeMiddleware'], funct
     Route::post('/tai-xe/tim-kiem','ChanhXe\TaiXeController@Find')->name('cx-tim-kiem-tai-xe');
 
 
+    //Thống kê theo đơn hàng
+    Route::get('/thong-ke-don-hang','ChanhXe\ThongKeController@index')->name('cx-thong-ke-don');
+    
+    Route::post('/thong-ke-don-hang-ajax','ChanhXe\ThongKeController@ThongKeAjax')->name('cx-thong-ke-ajax');
 
+    //Thống kê theo tháng - năm
+    Route::post('/thong-ke-don-theo-nam','ChanhXe\ThongKeController@storeAjax')->name('cx-thong-ke-don-theo-nam');
 
-
-    // Route::post('/tuyen-xe/kiem-tra','ChanhXe\TuyenXeController@CheckTuyen')->name('cx-tuyen-xe-kiem-tra');
-
-    // // Chành xe đăng kí tuyến - Map
-    // Route::get('/tuyen-xe-map','ChanhXe\TuyenXeController@ShowMap')->name('cx-tuyen-xe-map');
    
 
 });

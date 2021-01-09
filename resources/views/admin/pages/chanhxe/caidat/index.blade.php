@@ -369,15 +369,15 @@
                                             <div class="activity-desk">
                                                 <h5><a > {{$bl->kh_hoten}} </a><span style="float: right; color:#aba4a4;font-size:14px;">{{date('d-m-Y H:i:s', strtotime($bl->bl_created))}}</span></h5>
                                                 <p class="noidung"> {{$bl->bl_noidung}} </p> 
-                                                {{-- <a class="showform-rep" data-id="{!! $bl->bl_id!!}"><i class="fa fa-reply"></i> </a>Trả lời 
+                                                <a class="showform-rep" data-id="{!! $bl->bl_id!!}"><i class="fa fa-reply"></i> </a>Trả lời 
                                                 <a ><i class="fa fa-flag"></i></a>Báo cáo
                                                 @if ($bl->kh_id == Auth::guard('khachhang')->id())
                                                 <a  data-toggle="modal" data-target="#UpdateComment" data-com_id=" {{$bl->bl_id}} " class="UpComment"><i class="fa fa-pencil-square-o"></i></a>Sửa
                                                 <a href="{{ route('kh-binh-luan-xoa', ['id'=>$bl->bl_id]) }}" onclick="return XoaBinhLuan()"><i class="fa fa-trash-o"></i> </a>Xóa
-                                                @endif --}}
+                                                @endif
                                             </div>
                                              {{-- Trả lời bình luận --}}
-                                            {{-- <div class="row reply-comment" id="showrep{!!$bl->bl_id!!}">
+                                            <div class="row reply-comment" id="showrep{!!$bl->bl_id!!}">
                                                 <form action="{{ route('cx-binh-luan-tl', ['id'=>$bl->bl_id]) }}" method="post">
                                                     @csrf
                                                     <div class="col-md-8 " style="margin: 10px 0; padding-left:95px;">
@@ -388,10 +388,10 @@
                                                         <button type="submit" class="btn btn-success">Bình luận</button>
                                                     </div>
                                                 </form>
-                                            </div> --}}
+                                            </div>
                                             {{-- Hiện thị nội dung được trả lời bình luận --}}
                                             @foreach ($binhluan as $bl2)
-                                                @if ($bl->bl_id == $bl2->bl_idtraloi)
+                                                @if ($bl->bl_id == $bl2->bl_idtraloi && $bl2->cx_rep==0)
                                                     <ul class="activity-list" style="margin-left: 70px">
                                                         <li style="border-bottom:none; padding-bottom:0; margin:10px 0;">
                                                             <div class="avatar">
@@ -403,6 +403,19 @@
                                                             </div>
                                                         </li>
                                                     </ul>
+                                                @endif
+                                                @if ($bl->bl_id == $bl2->bl_idtraloi && $bl2->cx_rep!=0)
+                                                <ul class="activity-list" style="margin-left: 70px">
+                                                    <li style="border-bottom:none; padding-bottom:0; margin:10px 0;">
+                                                        <div class="avatar">
+                                                            <img src="http://localhost:8080/chanhxe/public/upload/khachhang/user-placeholder.png" alt=""/>
+                                                        </div>
+                                                        <div class="activity-desk">
+                                                            <h5 ><a href="#"> <i  style="color: #ab7f7f;font-size: 15px;" class="fa fa-shield"></i> {{$bl2->cx_tenchanhxe}} </a> </h5>
+                                                            <p class="text-muted"> {{$bl2->bl_noidung}} </p>
+                                                        </div>
+                                                    </li>
+                                                </ul>
                                                 @endif
                                             @endforeach
                                         </li>    

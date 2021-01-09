@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Hash;
 use DB;
-
+use Session;
 //Xử lý đăng nhập - đăng ký- đăng xuất cho khách hàng và chành xe
 
 class Authcontroller extends Controller
@@ -17,6 +17,8 @@ class Authcontroller extends Controller
        return view('users.login.register');
    }
 
+
+  
 
 
 
@@ -36,7 +38,9 @@ class Authcontroller extends Controller
             return redirect()->route('trang-chu-khach-hang');
 
         } else {
-            dd('Sai cmn rồi Phụng ơi! mầy ngu quá');
+            Session::flash('kiemtra', 'Sai tài khoản hoặc mật khẩu!'); 
+            return redirect()->route('dang-nhap');
+            
         }
     }
 
@@ -70,12 +74,53 @@ class Authcontroller extends Controller
             return redirect()->back();
         
     }
+   
 
  //------------------------------------Kết thúc Khách hàng------------------------------------------//
 
 
+  //Trang đăng nhập của admin
+  function LoginAdminIndex(){
+
+    return view('users.login.login-admin');
+    }
+    //đăng xuất admmin
+    public function LogoutAdmin()
+    {
+            Auth::guard('admin')->logout();
+            return redirect()->back();
+        
+    }
+
+   // đăng nhập admin!
+   public function LoginAdmin(Request $request){
+
+    // dd($request->all());
+    $arr = [
+        'username' => $request->username,
+        'password' => $request->password,
+    ];
+
+    if (Auth::guard('admin')->attempt($arr, true))
+    {
+        
+        return redirect()->route('admin-dashboard');
+
+    } else {
+        // dd('sai');
+        Session::flash('kiemtra', 'Sai tài khoản hoặc mật khẩu!'); 
+        return redirect()->route('login-admin-index');
+    }
+}
+
+
+
+
+
+
 
  //------------------------------------Chành xe ------------------------------------------//
+
 
    // đăng nhập khách hàng nè!
    public function LoginChanhXe(Request $request){
@@ -90,7 +135,8 @@ class Authcontroller extends Controller
         return redirect()->route('cx-dashboard');
 
     } else {
-        dd('Sai cmn rồi Phụng ơi! mầy ngu quá');
+        Session::flash('kiemtra', 'Sai tài khoản hoặc mật khẩu!'); 
+            return redirect()->route('dang-nhap');
     }
 }
 

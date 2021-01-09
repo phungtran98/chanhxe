@@ -37,6 +37,8 @@ class QLDonHangController extends Controller
    
     public function ChiTietDonHangIndex($id)
     {
+        $gia = DB::table('giacuoc')->first();
+        $cuoc = $gia->gc_gia;
         $hh_id = DB::table('chitietdonvanchuyen')->where('ctdvc_id',$id)->select('hh_id')->first();
         
         $hinhanh = DB::table('hinhanhhanghoa')->where('hh_id',$hh_id->hh_id)->select('hhhh_hinhanh')->get();
@@ -50,7 +52,7 @@ class QLDonHangController extends Controller
         ->join('chanhxe as cx','cx.cx_id','x.cx_id')
         ->where('ctdvc_id',$id)->first();
         //   dd($ctdvc);
-        return view('admin.pages.khachhang.quanlidonhang.chi-tiet-don-hang',compact('ctdvc','hinhanh'));
+        return view('admin.pages.khachhang.quanlidonhang.chi-tiet-don-hang',compact('ctdvc','hinhanh','cuoc'));
     }
 
 

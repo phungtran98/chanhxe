@@ -71,9 +71,15 @@
                         <td class="col-md-12" colspan="3">
                             <p style="font-weight: 700; font-size:14px; font-style:italic">THANH TOÁN</p>
                             <p >Tiền thu hộ (1): <strong style="float: right">{{number_format($ctdvc->hh_tienthuho) }} vnđ</strong></p>
-                            <p >Tổng cước phí vận chuyển (2):<strong style="float: right"> {{ number_format((int)$ctdvc->ctdvc_km  * $ctdvc->hh_khoiluong * 1000)}} vnđ</strong></p>
+                            <p >Tổng cước phí vận chuyển (2):<strong style="float: right"> {{ number_format((int)$ctdvc->ctdvc_km  * $ctdvc->hh_khoiluong * $cuoc)}} vnđ</strong></p>
+                            @if ($ctdvc->ctdvc_phigui !=0)
+                                <p >Đã thanh toán cước phí (3):<strong style="float: right"> -{{ number_format((int)$ctdvc->ctdvc_km  * $ctdvc->hh_khoiluong * $cuoc)}}vnđ</strong></p>
+                                <hr>
+                                <p >Tổng cước (1)+(2)+(3):<strong style="float: right"> {{number_format($ctdvc->hh_tienthuho) }} vnđ</strong></p>
+                            @else
                             <hr>
-                            <p >Tổng tiền phải thu (1)+(2):<strong style="float: right"> {{number_format($ctdvc->hh_tienthuho + ((int)$ctdvc->ctdvc_km  * $ctdvc->hh_khoiluong * 1000)) }} vnđ</strong></p>
+                            <p >Tổng cước (1)+(2):<strong style="float: right"> {{number_format($ctdvc->hh_tienthuho + ((int)$ctdvc->ctdvc_km  * $ctdvc->hh_khoiluong * $cuoc)) }} vnđ</strong></p>
+                            @endif
                         </td>
                     </tr>
                     <tr>

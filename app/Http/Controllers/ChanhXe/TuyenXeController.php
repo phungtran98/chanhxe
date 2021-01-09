@@ -22,6 +22,7 @@ class TuyenXeController extends Controller
         $tinh = DB::table('tinh')->get();
         $data = DB::table('tuyen as t')
         ->join('xe','xe.x_id','t.x_id')
+        ->where('xe.cx_id',auth::guard('chanhxe')->id())
         ->OrderBy('t.t_id','DESC')
         ->get();
         // dd($data);

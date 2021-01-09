@@ -40,8 +40,9 @@
                         <div class="col-lg-6">
                             <div class="cmp-info">
                                 <div class="cm-logo" style="margin-bottom: 0;">
-                                    <img src=" {{asset('vendor/users/images/logo/1.png')}} " alt="" width="260px">
-                                    <p id="title-logo">Hệ Thống Quản Lí Chành Xe</p>
+                                    <img src=" {{asset('vendor/users/images/logo/1.png')}} " alt="" width="240px">
+                                    <p style="font-size: 24px;font-weight: 700;line-height: 38px;color: #007d74;font-family: inherit;float: left;width: 140%;text-align: center;text-transform: uppercase;margin-left: -37px;
+                                    ">Nền tảng thông tin PQ logistic Kết nối thông minh các chành xe và khách hàng trực tuyến</p>
                                 </div>
                                 <!--cm-logo end-->
                                
@@ -49,6 +50,11 @@
                             <!--cmp-info end-->
                         </div>
                         <div class="col-lg-6">
+                            @if (Session::has('kiemtra'))
+                                <div style="position: absolute;left: -21px;top: 24px;" class="alert alert-danger" role="alert">
+                                    {{Session::get('kiemtra') }}
+                                </div>
+                            @endif
                             <div class="login-sec">
                                 <ul class="sign-control">
                                     <li data-tab="tab-1" class="current"><a href="#" title="">Đăng nhập</a></li>
@@ -117,6 +123,7 @@
                                         </form>
                                     </div>
                                     <!--dff-tab end-->
+                                    <a href=" {{ route('login-admin-index') }} ">Đăng nhập bằng tài khoản Admin</a>
                                 </div>
                                 <!--sign_in_sec end-->
                                 <div class="sign_in_sec" id="tab-2">
@@ -128,6 +135,7 @@
                                             <li data-tab="tab-6"><a href="#" title="">Chành Xe</a></li>
                                         </ul>
                                     </div>
+                                  
                                     <!--Phần này của khách hàng-->
                                     <div class="dff-tab current" id="tab-5">
                                         {{-- FORM NÀY DÀNH CHO ĐĂNG KÝ Khách Hàng --}}
@@ -232,6 +240,7 @@
                                 </div>
                             </div>
                             <!--login-sec end-->
+                            
                         </div>
                     </div>
                 </div>
@@ -241,7 +250,7 @@
             <div class="footy-sec">
                 <div class="container">
                     <ul>
-
+                        
                     </ul>
                 </div>
             </div>

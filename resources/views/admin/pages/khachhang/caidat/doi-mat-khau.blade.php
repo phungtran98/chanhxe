@@ -104,7 +104,7 @@
             <div class="col-lg-9">
                 <div class="iconic-input right text-w">
                     <i class="fa fa-lock"></i>
-                    <input type="text"
+                    <input type="password"
                     class="form-control " name="cx_password2" id="pass2"  placeholder="Nhập mật khẩu mới" disabled>
                 </div>
             </div>
@@ -114,7 +114,7 @@
             <div class="col-lg-9">
                 <div class="iconic-input right text-w">
                     <i class="fa fa-lock"></i>
-                    <input type="text"
+                    <input type="password"
                     class="form-control " name="cx_password3" id="re-pass2"  placeholder="Nhập lại mật khẩu" disabled>
                 </div>
             </div>

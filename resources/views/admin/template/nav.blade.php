@@ -86,13 +86,29 @@
                     </li>
                     <li class="{{Request::path()== 'chanh-xe/quan-li-khach-hang' ? 'active' : '' }}"><a href="{{ route('cx-quan-li-khach-hang') }}"><i class="fa fa-user"></i> <span>Quản lí khách hàng</span></a>
                     </li>
+                    <li class="{{Request::path()== 'chanh-xe/chanh-xe/thong-ke-don-hang' ? 'active' : '' }}"><a href="{{ route('cx-thong-ke-don') }}"><i class="fa fa-bar-chart-o"></i> <span>Thống kê đơn - doanh thu</span></a>
+                    </li>
                     <li class="menu-list"><a href=""><i class="fa fa-cogs"></i> <span>Cài đặt</span></a>
                         <ul class="sub-menu-list">
                             <li class="{{Request::path()== 'chanh-xe/cai-dat/thong-tin-chanh-xe' ? 'active' : '' }}"><a href="{{ route('cx-cai-dat') }}"> Thông tin Chành Xe</a></li>
                             <li class="{{Request::path()== 'chanh-xe/cai-dat/doi-mat-khau' ? 'active' : '' }}"><a href="{{ route('cx-doi-mat-khau') }}"> Đổi mật khẩu</a></li>
                         </ul>
                     </li>
+                    
                     <li><a href="{{ route('logout-chanhxe') }}"><i class="fa fa-sign-in"></i> <span>Đăng xuất</span></a></li>
+                {{-- Admin --}}
+                @elseif(auth::guard('admin')->check())
+                    <li class=""><a href="{{ route('admin-dashboard') }}"><i class="fa fa-home"></i> <span>Trang chủ</span></a>
+                    </li>
+                    <li class=""><a href="{{ route('admin-ds-chanh-xe') }}"><i class="fa fa-home"></i> <span>Danh sách chành xe</span></a>
+                    </li>
+                    <li class=""><a href="{{ route('admin-gia-cuoc') }}"><i class="fa fa-home"></i> <span>Cập nhật giá cước</span></a>
+                    </li>
+                    <li class=""><a href="{{ route('admin-thong-ke') }}"><i class="fa fa-home"></i> <span>Thống kê doanh thu</span></a>
+                    </li>
+                    
+                    
+                    <li><a href="{{ route('logout-admin') }}"><i class="fa fa-sign-in"></i> <span>Đăng xuất</span></a></li>
                 @endif
 
             </ul>

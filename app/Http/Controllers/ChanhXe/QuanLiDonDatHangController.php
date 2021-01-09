@@ -33,7 +33,7 @@ class QuanLiDonDatHangController extends Controller
         ->join('tuyen as t','t.t_id','ctdvc.t_id')
         ->join('xe as x','x.x_id','t.x_id')
         ->join('chanhxe as cx','cx.cx_id','x.cx_id')
-        ->where('cx.cx_id',auth::guard('chanhxe')->id())
+        ->where('dvc.cx_id',auth::guard('chanhxe')->id())
         ->orderBy('ctdvc.ctdvc_id','DESC')
         ->get();
         // dd($ctdvc);
@@ -43,6 +43,9 @@ class QuanLiDonDatHangController extends Controller
    
     public function ChiTietDonHangIndex($id)
     {
+
+        $gia = DB::table('giacuoc')->first();
+        $cuoc = $gia->gc_gia;
         $hh_id = DB::table('chitietdonvanchuyen')->where('ctdvc_id',$id)->select('hh_id')->first();
         
         $hinhanh = DB::table('hinhanhhanghoa')->where('hh_id',$hh_id->hh_id)->select('hhhh_hinhanh')->get();
@@ -55,7 +58,7 @@ class QuanLiDonDatHangController extends Controller
         ->join('chanhxe as cx','cx.cx_id','x.cx_id')
         ->where('ctdvc_id',$id)->first();
         //   dd($ctdvc);
-        return view('admin.pages.chanhxe.quanlidondathang.chi-tiet-don-hang',compact('ctdvc','hinhanh'));
+        return view('admin.pages.chanhxe.quanlidondathang.chi-tiet-don-hang',compact('ctdvc','hinhanh','cuoc'));
     }
 
 
@@ -176,8 +179,28 @@ class QuanLiDonDatHangController extends Controller
 
 
 
+    public function FindKhachHang($kh_id)
+    {
+       
+        $ctdvc = DB::table('chitietdonvanchuyen as ctdvc')
+        ->join('donvanchuyen as dvc','dvc.dvc_id','ctdvc.dvc_id')
+        ->join('khachhang as kh','kh.kh_id','dvc.kh_id')
+        ->join('hanghoa as hh','hh.hh_id','ctdvc.hh_id')
+        ->join('tuyen as t','t.t_id','ctdvc.t_id')
+        ->join('xe as x','x.x_id','t.x_id')
+        ->join('chanhxe as cx','cx.cx_id','x.cx_id')
+        ->where('kh.kh_id',$kh_id)
+        ->get();
+        // dd($ctdvc);
+        return view('admin.pages.chanhxe.quanlidondathang.index',compact('ctdvc'));
+    }
+
+
+
     public function InDonHanPDF($ctdvvc_id)
     {
+        $gia = DB::table('giacuoc')->first();
+        $cuoc = $gia->gc_gia;
         $pdf = \App::make('dompdf.wrapper');
         $ctdvc = DB::table('chitietdonvanchuyen as ctdvc')
         ->join('donvanchuyen as dvc','dvc.dvc_id','ctdvc.dvc_id')
@@ -195,7 +218,7 @@ class QuanLiDonDatHangController extends Controller
 
 
 
-        $pdf = PDF::loadView('admin.pages.chanhxe.quanlidondathang.hoa-don',compact('ctdvc','thoigian','Barcode'));
+        $pdf = PDF::loadView('admin.pages.chanhxe.quanlidondathang.hoa-don',compact('ctdvc','thoigian','Barcode','cuoc'));
         // return view('admin.pages.chanhxe.quanlidondathang.hoa-don',compact('ctdvc'));
         return $pdf->stream();
     }
@@ -209,7 +232,8 @@ class QuanLiDonDatHangController extends Controller
         
   
         // return $pdf->download('itsolutionstuff.pdf');
-         
+        $gia = DB::table('giacuoc')->first();
+        $cuoc = $gia->gc_gia;
         $ctdvc = DB::table('chitietdonvanchuyen as ctdvc')
         ->join('donvanchuyen as dvc','dvc.dvc_id','ctdvc.dvc_id')
         ->join('khachhang as kh','kh.kh_id','dvc.kh_id')
@@ -219,7 +243,7 @@ class QuanLiDonDatHangController extends Controller
         ->join('chanhxe as cx','cx.cx_id','x.cx_id')
         ->where('ctdvc_id',$ctdvvc_id)->first();
 
-        $p1= (int)$ctdvc->ctdvc_km  * $ctdvc->hh_khoiluong * 1000 ;          
+        $p1= (int)$ctdvc->ctdvc_km  * $ctdvc->hh_khoiluong * $cuoc ;          
         $thoigian = new Carbon();
 
         $templateProcessor = new TemplateProcessor('hoadon/phieuguihang.docx');
@@ -293,7 +317,7 @@ class QuanLiDonDatHangController extends Controller
         ->whereBetween('dvc.dvc_ngaylap',[$request->BDate,$request->EDate])
         ->orderBy('ctdvc.ctdvc_id','DESC')
         ->get();
-        dd($ctdvc);
+        // dd($ctdvc);
 
         return view('admin.pages.khachhang.quanlidonhang.quan-li-don-hang',compact('ctdvc'));
     }

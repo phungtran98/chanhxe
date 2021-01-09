@@ -72,11 +72,14 @@
                         
                 </table>
             </div>
-            <div class="col-md-12 mt-4">
+            <div class="col-md-10 mt-4">
                 <h5 style="color: #075f5b;font-weight: bold;font-size: 25px;text-align:center;text-transform: uppercase;"> <i>Vị trí các kho</i> </h5> 
                 <div id="map" style="width:100%; height:500px; margin:10px">
-
+                    
                 </div>
+            </div>
+            <div class="col-md-2">
+                <p class="btn btn-success" id="ChiDuongMap">Chỉ đường</p>
             </div>
          </div>
     </div>
@@ -94,7 +97,7 @@
 <script>
  function initMap(){
     
-    let myLatLng = new google.maps.LatLng(10.0270304,105.7667245);
+    let myLatLng = new google.maps.LatLng(10.0270304,105.7677245);
     
     map = new google.maps.Map(document.getElementById("map"), {
       center:myLatLng ,
@@ -105,8 +108,7 @@
     });
 
    
-    
-  
+    let vitriA='';
 
  
 
@@ -133,7 +135,8 @@
               console.log(response);
                for( let i = response.length-1; i>= 0; i--)
                 {
-                    console.log(response[i]);
+                    // console.log(response[i].k_diachi);
+                    vitriA=response[i].k_diachi;
                     createMarker(response[i]);
                 }
           }
@@ -157,26 +160,26 @@
 
     //chỉ đường nè
     const directionsService = new google.maps.DirectionsService();
-//    function Chiduong(a,b){
-//     directionsService.route({
-//         //Điểm bắt đầu, có dạng truyền tham số
-//         origin:a,
-//         //Điểm kết thúc
-//         destination:b,
-//         travelMode:'DRIVING'
-//     },
-//     function(result, status){
-//         if(status == "OK"){
-//             console.log(result);
+    function ChiduongNe(a,b){
+        directionsService.route({
+            //Điểm bắt đầu, có dạng truyền tham số
+            origin:a,
+            //Điểm kết thúc
+            destination:b,
+            travelMode:'DRIVING'
+        },
+        function(result, status){
+            if(status == "OK"){
+                console.log(result);
 
-//             const directionsRenderer = new google.maps.DirectionsRenderer({
-//             directions:result,
-//               map:map
+                const directionsRenderer = new google.maps.DirectionsRenderer({
+                directions:result,
+                map:map
 
-//             });
-//         }
-//     });
-//    }
+                });
+            }
+        });
+    }
 
 //    Chiduong('Hẻm 51, An Khánh, Ninh Kiều, Cần Thơ, Vietnam','Sóc Trăng, Quốc lộ 1A, Châu Thành, Châu Thành District, Sóc Trăng Province, Soc Trang, Vietnam');
 
@@ -203,6 +206,89 @@
     };
                
     getLocateChanhXe(); 
+
+    //Chỉ đường khi có sự kiện click
+    const service = new google.maps.DistanceMatrixService();
+
+    let ChiDuong = document.getElementById('ChiDuongMap');
+
+    function calculateAndDisplayRoute(newMarker) {
+
+    directionsRenderer.setMap(map);
+
+        directionsService.route(
+        {
+            origin: {lat:10.022678823009876 ,lng:105.75530472479245},
+            destination:newMarker.getPosition(),
+            travelMode: google.maps.TravelMode.DRIVING,
+        },
+        (response, status) => {
+            if (status === "OK") {
+            directionsRenderer.setDirections(response);
+            console.log(response);
+            //tinh khoang cach
+            //  service.getDistanceMatrix(
+            //   {
+            //     origins: ['Vinh long'],
+            //     destinations: [newMarker.getPosition()],
+            //     travelMode: google.maps.TravelMode.DRIVING,
+            //   },
+            //   (response, status) => {
+            //     if (status !== "OK") {
+            //       alert("Error was: " + status);
+
+            //     }
+            //     else{
+            //       var originList=response.originAddresses;
+            //       var destinationAddresses=response.destinationAddresses;
+            //       for (let i = 0; i < originList.length; i++) {
+            //           const results = response.rows[i].elements;
+            //             console.log(results);
+
+            //           for (let j = 0; j < results.length; j++) {
+            //             var element = results[j];
+            //             var dt =element.distance.text;
+            //             var dr =element.duration.text;
+            //             console.log(dt + dr);
+            //           }
+            //       } 
+            //     }
+            //   } 
+            //  );
+
+            } else {
+            window.alert("Directions request failed due to " + status);
+            }
+        }
+        );
+    }
+    google.maps.event.addDomListener(ChiDuong,'click',geoLocation);
+        
+        function geoLocation(position)
+        {
+            console.log('Ok');
+            if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                console.log(position);
+                const pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                };
+                map.setCenter(pos);
+                createMarker(pos);
+                }
+            );
+            } 
+            else{
+                alert('bị lỗi rồi');
+            }
+        }
+
+         
+
+
+
 }//end map
    
     

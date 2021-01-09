@@ -126,7 +126,7 @@ p._title_send {
             <hr>
             
             <p class="_title_send">Phí và tiền thu hộ <span class="_float_right" style="font-size:14px">Đơn vị tính (VNĐ)</span></p>
-            <?php $p1= (int)$ctdvc->ctdvc_km * $ctdvc->hh_khoiluong * 1000 ;  ?>
+            <?php $p1= (int)$ctdvc->ctdvc_km * $ctdvc->hh_khoiluong * $cuoc ;  ?>
             <p>Phí vận chuyển(1) <span class="_float_right _float_right_color">{{ number_format($p1)}}</span></p>
             <p>Tiền thu hộ (2) <span class="_float_right _float_right_color">{{number_format($ctdvc->hh_tienthuho)}}</span></p>
             @if ($ctdvc->ctdvc_phigui !=0)

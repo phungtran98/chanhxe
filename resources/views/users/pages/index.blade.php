@@ -8,7 +8,12 @@
             width: 80%;
             margin: auto;
         }
-        
+        .CheckNum{
+            border: 2px solid green;
+        }
+        .NCheckNum{
+            border: 2px solid red;
+        }
     </style>
 @endpush
 @section('content')
@@ -24,9 +29,24 @@
                         <form action="{{ route('kh.tra-cuu-don-hang') }}" method="post">
                             @csrf
                             <div class="form-group">
-                                <label for="">Nhập mã đơn hàng</label>
+                                <label for="">Nhập mã đơn hàng (<span style="color:red ">*</span>) </label><span id="ThongBao"  style="float: right; color:red"></span>
                                 <input type="text"
-                                  class="form-control" name="madon" placeholder="9878654642543">
+                                  class="form-control" name="madon" placeholder="9878654642543" id="NhapMaDon">
+                              </div>
+                              <button type="submit" class="btn btn-success">Tra cứu</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="card" style="margin-top: 20px">
+                    <img class="card-img-top" src="holder.js/100x180/" alt="">
+                    <div class="card-body">
+                        <h4 class="card-title" style="margin-bottom: 23px;/* margin-left: 4px; */color: #075f5b;font-weight: bold;font-size: 26px;text-align: center;margin-top: -10px;">Tra cứu Chành Xe theo Tuyến </h4>
+                        <form action="{{ route('kh.tra-cuu-tuyen') }}" method="post" id="TraCuuTuyenNesub">
+                            @csrf
+                            <div class="form-group">
+                                <label for="">Nhập tên tuyến (<span style="color:red ">*</span>)</label>
+                                <input type="text"
+                                  class="form-control" name="tentuyen" id="TraCuuTuyenNe" placeholder="Cần Thơ.....">
                               </div>
                               <button type="submit" class="btn btn-success">Tra cứu</button>
                         </form>
@@ -38,26 +58,27 @@
                     <img class="card-img-top" src="holder.js/100x180/" alt="">
                     <div class="card-body">
                         <h4 class="card-title" style="margin-bottom: 23px;/* margin-left: 4px; */color: #075f5b;font-weight: bold;font-size: 26px;text-align: center;margin-top: -10px;">Ước tính cước phí</h4>
-                       <form action="" method="post">
+                       <form action="{{ route('kh.uoc-tinh-phi') }}" method="post">
+                        @csrf
                            <div class="form-group">
-                             <label for="">Gửi từ</label>
-                             <input type="text" class="form-control" placeholder="Nhập địa điểm gửi" name="" id="DiemTu" />
+                             <label for="">Gửi từ (<span style="color:red ">*</span>)</label>
+                             <input type="text" class="form-control" placeholder="Nhập địa điểm gửi" name="noidi" id="DiemTu" />
                            </div>
                            <div class="form-group">
-                             <label for="">Gửi đến</label>
-                             <input type="text" class="form-control" placeholder="Nhập địa diểm đến" name="" id="DiemDen" />
+                             <label for="">Gửi đến (<span style="color:red ">*</span>)</label>
+                             <input type="text" class="form-control" placeholder="Nhập địa diểm đến" name="noiden" id="DiemDen" />
                            </div>
                            <div class="row">
                                <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Tổng khối lượng </label>
-                                    <input type="text" class="form-control" name="tong_khoi_luong" />
+                                    <label for="">Tổng khối lượng(KG) (<span style="color:red ">*</span>)</label>
+                                    <input type="number" class="form-control" name="tong_khoi_luong" />
                                     <input type="hidden"  name="kh_nhan_km" id="kh_nhan_km_val" />
                                   </div>
                                </div>
                                <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Khoảng cách </label>
+                                    <label for="">Khoảng cách(KM) </label>
                                     <input type="text" class="form-control" id="kh_nhan_km"  name="" disabled/>
                                     
                                   </div>
@@ -119,6 +140,39 @@
 </div>
 @endsection
 @push('css')
+<script
+  src="https://code.jquery.com/jquery-1.12.4.js"
+  integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+  crossorigin="anonymous"></script>
+<script>
+     $(document).ready(function () {
+       
+            $('#TraCuuTuyenNe').keypress(function (e) {
+            if (e.which == 13) {
+                $('form#lTraCuuTuyenNesub').submit();
+                return false;    //<---- Add this line
+            }
+            });
+  
+        
+        $('#NhapMaDon').keyup(function (e) { 
+            var num=$(this).val();
+            if(/^\d*$/.test(num)){
+                // console.log('so');
+                $('#NhapMaDon').removeClass('NCheckNum');
+                $('#NhapMaDon').addClass('CheckNum');
+                $('#ThongBao').append('');
+               
+            }
+            else
+            {
+                $('#NhapMaDon').removeClass('CheckNum');
+                $('#NhapMaDon').addClass('NCheckNum');
+                $('#ThongBao').append('Bạn phải nhập số!');
+            }
+        });
+    });
+</script>
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaaygZT7_LyyyK1fE9Wf9nsBHfJXgzXXY&libraries=places&callback=initMap"
     
@@ -134,11 +188,16 @@
     // const geocoder = new google.maps.Geocoder();
     const service = new google.maps.DistanceMatrixService();
 
+    //---Gới hạn quốc gia ---//
+    // var options = {
+    //     types: ['(cities)'],
+    //     componentRestrictions: {country: "vi"}
+    // };
 
     const autocomplete1 = new  google.maps.places.Autocomplete(document.getElementById('DiemTu'));
     const autocomplete = new  google.maps.places.Autocomplete(document.getElementById('DiemDen'));
-
     autocomplete.addListener('place_changed',function(){
+    
     const DiemTu = document.getElementById('DiemTu').value;
     const DiemDen = document.getElementById('DiemDen').value;
     // place = autocomplete.getPlace();
@@ -193,7 +252,7 @@
 
                         for (let j = 0; j < results.length; j++) {
                             var element = results[j];
-                            dtval =element.distance.value;
+                            var dtval =element.distance.value;
                             dt =element.distance.text;
                             dr =element.duration.text;
                         
@@ -219,4 +278,5 @@
 }
 
 </script>
+
 @endpush

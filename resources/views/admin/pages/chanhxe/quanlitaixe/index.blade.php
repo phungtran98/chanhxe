@@ -128,7 +128,7 @@ tr.table_thead1 > td{
                     <div class="form-group">
                       <label for=""> <strong>Địa chỉ</strong> <span class="star-red">*</span></label>
                       <input type="text"
-                        class="form-control" name="tx_diachi" id="" required>
+                        class="form-control" name="tx_diachi" id="GetLocal" placeholder="Nhập địa chỉ..." >
                     </div>
                     <div class="form-group">
                       <label for=""><strong>Hình ảnh bằng láy</strong> <span class="star-red">*</span></label>
@@ -179,7 +179,7 @@ tr.table_thead1 > td{
                         <div class="form-group">
                           <label for=""> <strong>Địa chỉ</strong> <span class="star-red">*</span></label>
                           <input type="text"
-                            class="form-control" name="tx_diachi" id="tx_diachi" required>
+                            class="form-control" name="tx_diachi" id="tx_diachi"  required>
                         </div>
                         <div class="form-group">
                           <label for=""><strong>Hình ảnh bằng láy</strong> <span class="star-red">*</span></label>
@@ -205,6 +205,7 @@ tr.table_thead1 > td{
 
 @endsection
 @push('script')
+
 <script>
 
     //Tìm kiếm
