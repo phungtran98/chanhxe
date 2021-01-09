@@ -7,7 +7,21 @@
    .table_thead{
     background: #075f5b;
     color: white;
-}
+    }
+    .Chiduong{
+        width: 154%;
+        height: 500px;
+        margin-top: 65px;
+        margin-left: -6px;
+        background: #f2f2f2;
+        padding: 10px;
+    }
+    ._gg-content{
+        color: #075f5b;
+        font-size: 17px;
+        font-style: italic;
+        padding-left: 8px;
+    }
 
 </style>
 @endpush
@@ -79,7 +93,19 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <p class="btn btn-success" id="ChiDuongMap">Chỉ đường</p>
+                <p class="genric-btn primary circle arrow" id="ChiDuongMap" style="margin-left: 25%;margin-top: 10px;">Chỉ đường</p>
+                <div class="Chiduong">
+                    <p>Từ: <span id="From" class="_gg-content"></span> </p>
+                    <hr>
+                    <p>Đến: <span id="To" class="_gg-content"></span></p>
+                    <hr>
+                    <p>Khoảng cách: <span id="KmTo" class="_gg-content"></span></p>
+                    <hr>
+                    <p>Thời gian: <span id="TimeTo" class="_gg-content"></span></p>
+                    <hr>
+                    <p>Phương tiện: <strong id="Traffic" class="_gg-content"> </strong></p>
+                </div>
+                
             </div>
          </div>
     </div>
@@ -97,7 +123,7 @@
 <script>
  function initMap(){
     
-    let myLatLng = new google.maps.LatLng(10.0270304,105.7677245);
+    let myLatLng = new google.maps.LatLng(10.010357599999999,105.73805109999999);
     
     map = new google.maps.Map(document.getElementById("map"), {
       center:myLatLng ,
@@ -146,7 +172,7 @@
     function createMarker(pos){
         let newMarker = new google.maps.Marker({
         position:pos,
-        map:map,
+        center:map,
         icon:{
                 url:"http://localhost:8080/chanhxe/public/vendor/users/images/logo/1.png",
                 scaledSize:{
@@ -159,7 +185,7 @@
     };
 
     //chỉ đường nè
-    const directionsService = new google.maps.DirectionsService();
+    // const directionsService = new google.maps.DirectionsService();
     function ChiduongNe(a,b){
         directionsService.route({
             //Điểm bắt đầu, có dạng truyền tham số
@@ -209,83 +235,123 @@
 
     //Chỉ đường khi có sự kiện click
     const service = new google.maps.DistanceMatrixService();
+    //chi đường A va B
+    const directionsService = new google.maps.DirectionsService();
+    const directionsRenderer = new google.maps.DirectionsRenderer();
+    const geocoder = new google.maps.Geocoder();
+
 
     let ChiDuong = document.getElementById('ChiDuongMap');
 
-    function calculateAndDisplayRoute(newMarker) {
+    function calculateAndDisplayRoute(PointA, PointB) {
 
-    directionsRenderer.setMap(map);
+        directionsRenderer.setMap(map);
 
         directionsService.route(
-        {
-            origin: {lat:10.022678823009876 ,lng:105.75530472479245},
-            destination:newMarker.getPosition(),
-            travelMode: google.maps.TravelMode.DRIVING,
-        },
-        (response, status) => {
-            if (status === "OK") {
-            directionsRenderer.setDirections(response);
-            console.log(response);
-            //tinh khoang cach
-            //  service.getDistanceMatrix(
-            //   {
-            //     origins: ['Vinh long'],
-            //     destinations: [newMarker.getPosition()],
-            //     travelMode: google.maps.TravelMode.DRIVING,
-            //   },
-            //   (response, status) => {
-            //     if (status !== "OK") {
-            //       alert("Error was: " + status);
+            {
+                origin:PointB,
+                destination:PointA,
+                travelMode: google.maps.TravelMode.DRIVING,
+            },
+            (response, status) => {
+                if (status === "OK") {
+                    directionsRenderer.setDirections(response);
+                    console.log(response);
+                    //tinh khoang cach
+                    service.getDistanceMatrix(
+                    {
+                        origins:[PointA],
+                        // destinations: [newMarker.getPosition()],
+                        destinations:[PointB],
+                        travelMode: google.maps.TravelMode.DRIVING,
+                    },
+                    (response, status) => {
+                        if (status !== "OK") {
+                        alert("Error was: " + status);
 
-            //     }
-            //     else{
-            //       var originList=response.originAddresses;
-            //       var destinationAddresses=response.destinationAddresses;
-            //       for (let i = 0; i < originList.length; i++) {
-            //           const results = response.rows[i].elements;
-            //             console.log(results);
+                        }
+                        else{
+                        var originList=response.originAddresses;
+                        var destinationAddresses=response.destinationAddresses;
+                        for (let i = 0; i < originList.length; i++) {
+                            const results = response.rows[i].elements;
+                                // console.log(results);
 
-            //           for (let j = 0; j < results.length; j++) {
-            //             var element = results[j];
-            //             var dt =element.distance.text;
-            //             var dr =element.duration.text;
-            //             console.log(dt + dr);
-            //           }
-            //       } 
-            //     }
-            //   } 
-            //  );
+                            for (let j = 0; j < results.length; j++) {
+                                var element = results[j];
+                                var dt =element.distance.text;
+                                var dr =element.duration.text;
+                                console.log(dt + dr);
+                                $('#KmTo').append('');
+                                $('#TimeTo').append('');
+                                $('#Traffic').append('');
+                                $('#KmTo').append(dt);
+                                $('#TimeTo').append(dr);
+                                $('#Traffic').append('Ô Tô');
 
-            } else {
-            window.alert("Directions request failed due to " + status);
+                            }
+                        } 
+                        }
+                    } 
+                );
+
+                } 
+                else 
+                {
+                    window.alert("Directions request failed due to " + status);
+                }
             }
-        }
         );
     }
+
+
+
     google.maps.event.addDomListener(ChiDuong,'click',geoLocation);
         
-        function geoLocation(position)
-        {
-            console.log('Ok');
-            if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                console.log(position);
-                const pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude,
-                };
-                map.setCenter(pos);
-                createMarker(pos);
-                }
-            );
-            } 
-            else{
-                alert('bị lỗi rồi');
+    function geoLocation(position)
+    {
+
+       
+
+        // alert(vitriA);
+        // console.log('Ok');
+        if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+            // console.log(position);
+            const pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+            };
+            // console.log(pos);
+            geocoder.geocode({ location: pos  }, (results, status) => {
+                if (status === "OK") {
+                    if (results[0]) {
+                
+                       console.log(results[0].formatted_address);
+                    $('#From').append('');
+                    $('#From').append(results[0].formatted_address);
+                    $('#To').append('');
+                    $('#To').append(vitriA);
+                    } 
+                } 
+            });
+
+            // console.log(pos);
+            map.setCenter(pos);
+            createMarker(pos);
+            calculateAndDisplayRoute(vitriA,pos);
             }
+        );
+        } 
+        else{
+            alert('bị lỗi rồi');
         }
+    }
 
          
+
+
 
 
 

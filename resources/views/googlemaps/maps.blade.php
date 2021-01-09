@@ -182,7 +182,7 @@ div#current-loaction{
       //chi đường A va B
       const directionsService = new google.maps.DirectionsService();
       const directionsRenderer = new google.maps.DirectionsRenderer();
-
+      // const geocoder = new google.maps.Geocoder();
       //Khoang cach
       // const geocoder = new google.maps.Geocoder();
       const service = new google.maps.DistanceMatrixService();
@@ -257,16 +257,15 @@ div#current-loaction{
       
       
 
-      // calculateAndDisplayRoute(marker);
+      calculateAndDisplayRoute(marker);
 
       ZoomControl();
       GeolocationControl();
 
       
-      function ChiDuong()
-      {
-        GeolocationControl();
-      }
+    
+      GeolocationControl();
+      
       
     } //end intMap   
     
