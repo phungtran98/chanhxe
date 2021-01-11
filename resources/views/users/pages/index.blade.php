@@ -66,7 +66,7 @@
                            </div>
                            <div class="form-group">
                              <label for="">Gửi đến (<span style="color:red ">*</span>)</label>
-                             <input type="text" class="form-control" placeholder="Nhập địa diểm đến" name="noiden" id="DiemDen" />
+                             <input type="text" class="form-control" placeholder="Nhập địa điểm đến" name="noiden" id="DiemDen" />
                            </div>
                            <div class="row">
                                <div class="col-md-6">
@@ -176,7 +176,7 @@
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaaygZT7_LyyyK1fE9Wf9nsBHfJXgzXXY&libraries=places&callback=initMap"
     
-    ></script>
+    ></script>  
 <script>
   // Ggoogle map
   function initMap() {

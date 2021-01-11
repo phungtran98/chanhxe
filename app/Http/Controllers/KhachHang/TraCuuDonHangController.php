@@ -37,7 +37,7 @@ class TraCuuDonHangController extends Controller
         $data['km']= number_format($request->kh_nhan_km);
         $data['noidi']= $request->noidi;
         $data['noiden']= $request->noiden;
-        $a= $km* $data['khoiluong'] * $cuoc;
+        $a= ($km/1000)* $data['khoiluong'] * $cuoc;
         $data['cuoc'] = number_format($a) ;
 
 

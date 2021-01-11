@@ -77,7 +77,7 @@
                                         
                                     </div>
                                     <div class="col-xs-3">
-                                        <a class="dir-like" href="#" style="color: #075f5b;font-weight: bold;font-size: 15px;">
+                                        <a class="dir-like" href="#" style="color: #075f5b;font-weight: bold;font-size: 15px; margin-left:-20px">
                                             {{number_format($tongDoanhThu)}} vnđ
                                           
                                         </a>
@@ -199,14 +199,19 @@
 @push('script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
 <script>
-
+    var month= ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5','Tháng 6','Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12' ];
+    var ctx = document.getElementById('myChart').getContext('2d');
     function SelectYear(){
 
         var date = new Date();
         var nam = date.getFullYear();
         for(var i=nam -5 ; i<=2025 ; i++)
-        {
-            $('#ChonNam').append('<option value="'+i+'">'+i+'</option>');
+        {   if(i == nam)
+            {
+                $('#ChonNam').append('<option value="'+i+'" selected>'+i+'</option>');
+            }
+             $('#ChonNam').append('<option value="'+i+'">'+i+'</option>');
+            
         }
 
     }
@@ -300,8 +305,7 @@
     
 
 
-    var month= ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5','Tháng 6','Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12' ];
-    var ctx = document.getElementById('myChart').getContext('2d');
+    
 
     $.ajaxSetup({
     headers: {

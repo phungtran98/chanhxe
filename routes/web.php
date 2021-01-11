@@ -102,6 +102,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/cap-nhat-gia-cuoc','Admin\GiaCuocController@index')->name('admin-gia-cuoc');
 
         Route::post('/cap-nhat-gia-cuoc','Admin\GiaCuocController@store')->name('admin-gia-cuoc-submit');
+
+        // Thốnng kê chành xe theo năm
+        Route::post('/thong-ke-don-admin','Admin\ThongKeController@storeAjax')->name('cx-thong-ke-don-theo-nam-admin');
     
         //Đăng xuất 
         Route::get('/dang-xuat-admin','AuthController@LogoutAdmin')->name('logout-admin');
@@ -328,8 +331,6 @@ Route::group(['prefix' => 'chanh-xe','middleware' => 'ChanhXeMiddleware'], funct
     
     
 
-
-
     //quản lý đăng  ký xe
     Route::get('/xe','ChanhXe\XeController@index')->name('cx-xe');
 
@@ -368,6 +369,11 @@ Route::group(['prefix' => 'chanh-xe','middleware' => 'ChanhXeMiddleware'], funct
     Route::post('/thong-ke-don-theo-nam','ChanhXe\ThongKeController@storeAjax')->name('cx-thong-ke-don-theo-nam');
 
    
+    //Xem hóa đơn
+    Route::get('/xem-hoa-don','ChanhXe\XemHoaDonController@index')->name('cx-xem-hoa-don');
+
+    Route::get('/xem-hoa-don/{id}','ChanhXe\XemHoaDonController@destroy')->name('cx-xem-hoa-don-xoa');
+
 
 });
 
@@ -407,7 +413,6 @@ Route::get('/chi-duong', function () {
 Route::get('/google-maps-api', function () {
     return view('googlemaps.maps');
 });
-
 
 Route::get('/nguoi-dung-trang-chu', function () {
     return view('users.template.masters');

@@ -91,7 +91,7 @@ tr.table_thead1 > td{
                             <td class="tr_css"> {{$xe->tx_sdt}}</td>
                             <td class="tr_css"> {{$xe->x_bienso}}</td>
                             <td> {{$xe->x_mota}}</td>
-                            <td style="width:160px" class="tr_css"> 
+                            <td style="width:165px" class="tr_css"> 
                                 <a title="" class="btn btn-warning update_car" data-toggle="modal" data-target="#Modal_Update_cart" data-xe="{{$xe->x_id}}">Cập nhật</a>
                                 <a title="Xóa xe" class="btn btn-danger " href="{{ route('cx-xoa-xe', ['id'=>$xe->x_id]) }}"  onclick=" return Delete_car()">Xóa</a>
                             </td>

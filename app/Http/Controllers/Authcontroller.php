@@ -47,10 +47,9 @@ class Authcontroller extends Controller
     //đăng ký khách hàng
    public function RegisterKhachHang(Request $request) 
     {
+        // dd($request->all());
         $data = [];
         $data['kh_hoten']= $request->kh_hoten;
-        $data['kh_sdt']= $request->kh_sdt;
-        $data['kh_diachi']= $request->kh_diachi;
         $data['username']= $request->kh_username;
         $data['password']=Hash::make($request->kh_password) ;
 
@@ -143,10 +142,10 @@ class Authcontroller extends Controller
 //đăng ký chành xe
 public function RegisterChanhXe(Request $request) 
 {
+    // dd($request->all());
     $data = [];
     $data['cx_hoten']= $request->cx_hoten;
-    $data['cx_sdt']= $request->cx_sdt;
-    $data['cx_diachi']= $request->cx_diachi;
+    $data['cx_tenchanhxe']= $request->cx_hoten;
     $data['username']= $request->cx_username;
     $data['password']=Hash::make($request->cx_password) ;
 

@@ -214,12 +214,25 @@ class QuanLiDonDatHangController extends Controller
 
         $Barcode = new DNS1D();
         $Barcode->setStorPath(__DIR__.'/cache/');
-       
 
+        $thoigian = new Carbon();
+        $ngaythang = date('d-m-Y', strtotime($thoigian));
+        // dd($ngaythang);
+        $madon = $ctdvc->dvc_madon;
 
+        DB::table('xemhoadon')->insert(
+            [
+                'xhd_ten'=>$ngaythang.'_'.$madon.'.pdf',
+                'cx_id'=>Auth::guard('chanhxe')->id()
+            ]
+            
+        );
 
+        PDF::loadView('admin.pages.chanhxe.quanlidondathang.hoa-don',compact('ctdvc','thoigian','Barcode','cuoc'))->save('hoadon/pdf/'.$ngaythang.'_'.$madon.'.pdf');
+ 
         $pdf = PDF::loadView('admin.pages.chanhxe.quanlidondathang.hoa-don',compact('ctdvc','thoigian','Barcode','cuoc'));
         // return view('admin.pages.chanhxe.quanlidondathang.hoa-don',compact('ctdvc'));
+        // return DF::loadFile(public_path().'/myfile.html')->save('/path-to/my_stored_file.pdf')->stream('download.pdf');
         return $pdf->stream();
     }
     public function InDonHang($ctdvvc_id)

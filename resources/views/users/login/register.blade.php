@@ -77,17 +77,17 @@
                                             <div class="row">
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="text" name="username" placeholder="Tên đăng nhập">
+                                                        <input type="text" name="username" placeholder="Tên đăng nhập" id="KHusername">
                                                         <i class="la la-user"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="password" name="password" placeholder="Mật khẩu">
+                                                        <input type="password" name="password" placeholder="Mật khẩu" id="KHpassword">
                                                         <i class="la la-lock"></i>
                                                     </div>
                                                     <div class="col-lg-12 no-pdd">
-                                                        <button type="submit" value="submit">Đăng nhập</button>
+                                                        <button type="submit" value="submit" id="KHsubmit" >Đăng nhập</button>
                                                         <br>
                                                         <br>
                                                     </div>
@@ -144,20 +144,20 @@
                                             <div class="row">
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="text" name="kh_hoten" placeholder="Họ tên">
+                                                        <input type="text" name="kh_hoten" placeholder="Họ tên" >
                                                         <i class="la la-user"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="text" name="kh_username" placeholder="Tên đăng nhập">
+                                                        <input type="text" name="kh_username" placeholder="Tên đăng nhập" >
                                                         <i class="la la-user"></i>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="password" name="kh_password" placeholder="Mật khẩu">
+                                                        <input type="password" name="kh_password" placeholder="Mật khẩu" >
                                                         <i class="la la-lock"></i>
                                                     </div>
                                                 </div>
@@ -166,18 +166,6 @@
                                                         <input type="password" name="repeat-password" id="repeat-password" onkeyup="checkpass()"
                                                             placeholder="Nhập lại mật khẩu">
                                                         <i class="la la-lock"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 no-pdd">
-                                                    <div class="sn-field">
-                                                        <input type="text" name="kh_sdt" placeholder="Số điện thoại">
-                                                        <i class="la la-user"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 no-pdd">
-                                                    <div class="sn-field">
-                                                        <input type="text" name="kh_diachi" placeholder="Địa chỉ">
-                                                        <i class="la la-globe"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
@@ -194,7 +182,11 @@
                                             <div class="row">
                                                 <div class="col-lg-12 no-pdd">
                                                     <div class="sn-field">
-                                                        <input type="text" name="cx_hoten" placeholder="Họ tên">
+                                                        <input type="text" name="cx_hoten" placeholder="Họ tên chủ chành xe">
+                                                        <i class="la la-user"></i>
+                                                    </div>
+                                                    <div class="sn-field">
+                                                        <input type="text" name="cx_tenchanhxe" placeholder="Tên chành xe">
                                                         <i class="la la-user"></i>
                                                     </div>
                                                 </div>
@@ -216,18 +208,6 @@
                                                         <input type="password" name="repeat-password"
                                                             placeholder="Nhập lại mật khẩu" id="repeat-password" onkeyup="checkpass()">
                                                         <i class="la la-lock"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 no-pdd">
-                                                    <div class="sn-field">
-                                                        <input type="text" name="cx_sdt" placeholder="Số điện thoại">
-                                                        <i class="la la-user"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 no-pdd">
-                                                    <div class="sn-field">
-                                                        <input type="text" name="cx_diachi" placeholder="Địa chỉ">
-                                                        <i class="la la-globe"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12 no-pdd">
@@ -271,24 +251,9 @@
     <script type="text/javascript" src="{{asset('client/slick/slick.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('client/js/script.js')}}"></script>
     <script>
-        //kiểm tra mật khẩu
-         
-        // function checkpass() {
-        //     var x = document.getElementById("repeat-password").value;
-        //     var y = document.getElementById("password").value;
+      $(document).ready(function () {
 
-        //     if(x != y){
-        //         var element = document.getElementById("repeat-password");
-        //         element.classList.add("mystyle");
-        //     }
-        //     else
-        //     {
-                
-        //         var element = document.getElementById("repeat-password");
-        //         element.classList.add("mystyle1");
-        //     }
-            
-        // }
+      });
     </script>
 </body>
 

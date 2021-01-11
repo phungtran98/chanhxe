@@ -27,7 +27,9 @@ class ThongKeController extends Controller
         $donDaDuyet=0;
         $donDaXoa=0;
         $tongDoanhThu = 0;
-        $don = DB::table('chitietdonvanchuyen')->get();
+        $don = DB::table('chitietdonvanchuyen as ctdvc')
+        ->join('donvanchuyen as dvc','dvc.dvc_id','ctdvc.dvc_id')
+        ->where('dvc.cx_id',Auth::guard('chanhxe')->id())->get();
         $donTong += count($don);
         
         foreach($don as $val){
@@ -163,7 +165,7 @@ class ThongKeController extends Controller
             ->join('hanghoa as hh','hh.hh_id','ctdvc.hh_id')
             ->where('cx.cx_id',auth::guard('chanhxe')->id())
             ->whereMonth('dvc.dvc_ngaylap',$i)
-            ->whereYear('dvc.dvc_ngaylap',2020)
+            ->whereYear('dvc.dvc_ngaylap',2021)
             ->where('ctdvc.ctdvc_trangthaidon',3)
             ->select('hh.hh_tienthuho','hh.hh_khoiluong','ctdvc.ctdvc_phigui','ctdvc.ctdvc_km')
             ->get();

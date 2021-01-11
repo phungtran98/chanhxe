@@ -33,6 +33,8 @@ class KhachHangController extends Controller
     public function AdminKhachHang()
     {
         $chanhxe = DB::table('chanhxe')->get();
+        $gia = DB::table('giacuoc')->first();
+        $cuoc = $gia->gc_gia;
         $dvc =DB::table('donvanchuyen as dvc')
         ->join('chitietdonvanchuyen as ctdvc','ctdvc.dvc_id','dvc.dvc_id')
         ->join('hanghoa as hh','hh.hh_id','ctdvc.hh_id')
@@ -41,7 +43,7 @@ class KhachHangController extends Controller
         // dd($dvc);
 
 
-        return view('admin.pages.khachhang.dashboard.index',compact('chanhxe','dvc'));
+        return view('admin.pages.khachhang.dashboard.index',compact('chanhxe','dvc','cuoc'));
     }
 
     

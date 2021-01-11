@@ -68,7 +68,6 @@ class ThongTinChanhXeController extends Controller
 
                 if($item->bl_danhgia==5)
                    { $star[4] = $star[4] +1;}
-                
             }
         }
         if($count ==0){

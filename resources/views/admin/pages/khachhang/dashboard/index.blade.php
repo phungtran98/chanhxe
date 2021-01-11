@@ -19,7 +19,7 @@
                         <?php  $total=0;?>
                         @foreach ($dvc as $item)
                             @if ($item->ctdvc_trangthaidon ==3)
-                            <?php $total+= (int)$item->ctdvc_km  * $item->hh_khoiluong * 30000 ;  ?>
+                            <?php $total+= (int)$item->ctdvc_km  * $item->hh_khoiluong * $cuoc ;  ?>
                             @endif
                         @endforeach
                         <h4> {{ number_format($total)}} </h4>

@@ -82,6 +82,7 @@ tr.table_thead> th {
                         <th>Trạng thái</th>
                         <th>Người gửi</th>
                         <th>Người nhận</th>
+                        <th>Đơn vị vận chuyển</th>
                         <th>Hàng hóa</th>
                         <th>Kích thước</th>
                         <th>Khối lượng</th>
@@ -110,6 +111,7 @@ tr.table_thead> th {
                                 </td>
                                 <td> {{$item->kh_hoten}} </td>
                                 <td> {{$item->ctdvc_hotennhan}} </td>
+                                <td> <strong>{{$item->cx_tenchanhxe}}</strong></td>
                                 <td> {{$item->hh_ten .' x '. $item->hh_soluong}} </td>
                                 <td> {{$item->hh_kichthuoc}} </td>
                                 <td> {{$item->hh_khoiluong}} Kg</td>

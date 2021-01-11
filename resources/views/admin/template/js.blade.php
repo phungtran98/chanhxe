@@ -22,15 +22,7 @@
 <script src="{{asset('vendor/admin/js/iCheck/jquery.icheck.js')}}"></script>
 <script src="{{asset('vendor/admin/js/icheck-init.js')}}"></script>
 
-<!-- jQuery Flot Chart-->
-{{-- <script src="{{asset('vendor/admin/js/flot-chart/jquery.flot.js')}}"></script>
-<script src="{{asset('vendor/admin/js/flot-chart/jquery.flot.tooltip.js')}}"></script>
-<script src="{{asset('vendor/admin/js/flot-chart/jquery.flot.resize.js')}}"></script>
-<script src="{{asset('vendor/admin/js/flot-chart/jquery.flot.pie.resize.js')}}"></script>
-<script src="{{asset('vendor/admin/js/flot-chart/jquery.flot.selection.js')}}"></script>
-<script src="{{asset('vendor/admin/js/flot-chart/jquery.flot.stack.js')}}"></script>
-<script src="{{asset('vendor/admin/js/flot-chart/jquery.flot.time.js')}}"></script>
-<script src="{{asset('vendor/admin/js/main-chart.js')}}"></script> --}}
+
 
 <!--common scripts for all pages-->
 <script src="{{asset('vendor/admin/js/scripts.js')}}"></script>

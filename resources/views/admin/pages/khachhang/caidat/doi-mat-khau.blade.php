@@ -95,7 +95,7 @@
                 <div class="iconic-input right text-w">
                     <i class="fa fa-lock"></i>
                     <input type="password"
-              class="form-control" id="pass1"  placeholder="Nhập mật khẩu củ">
+              class="form-control" id="pass1"  placeholder="Nhập mật khẩu cũ">
                 </div>
             </div>
         </div>

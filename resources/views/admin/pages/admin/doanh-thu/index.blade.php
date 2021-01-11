@@ -67,7 +67,15 @@
         </table>
     </div>
     <input type="hidden" id="Gia" value=" {{$cuoc}} ">
-    <div class="col-md-12" style="margin-top: 50px">
+    <div class="col-md-4" style="margin-top: 50px">
+        <div class="form-group">
+            <label for="">Chọn năm</label>
+            <select class="form-control" name="" id="ChonNam">
+             <option disabled selected>---chọn năm---</option>
+            </select>
+          </div>
+    </div>
+    <div class="col-md-12" >
         <div class="panel panel-primary">
             <div class="panel-heading" style="background:#075f5b ">
                 Thống kê doanh thu
@@ -92,22 +100,151 @@
 @push('script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
 <script>
+
+
     var month= ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5','Tháng 6','Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12' ];
     var ctx = document.getElementById('myChart').getContext('2d');
-    $('#GetChanhXe').change(function (e) { 
+
+    function SelectYear(){
+
+    var date = new Date();
+    var nam = date.getFullYear();
+    for(var i=nam -5 ; i<=2025 ; i++)
+    {   if(i == nam)
+        {
+            $('#ChonNam').append('<option value="'+i+'" selected>'+i+'</option>');
+        }
+        $('#ChonNam').append('<option value="'+i+'">'+i+'</option>');
+        
+    }
+
+    }
+    SelectYear();
+    $('#ChonNam').change(function (e) { 
+        
         e.preventDefault();
-        $('#TableChanhXe').empty();
-        var cx_id = $(this).val();
-        console.log(cx_id);
-
-
+        var nam = $(this).val();
+        var cx_id = $('#GetChanhXe').val();
+        alert(cx_id);
         $.ajaxSetup({
         headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        var check=0;
+        $.ajax({
+            type: "POST",
+            url: "{{ route('cx-thong-ke-don-theo-nam-admin')}}",
+            data: {nam:nam, id:cx_id},
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+                for(var i=0; i< response.length; i++)
+                {
+                    if(response[i] > 0)
+                    {
+                        check=1;
+                        break;
+                    }
+                }
+                // console.log(check);
+                if(check == 0)
+                {
+                    alert('Chưa có dữ liệu để thống kê');
+                }
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels:month,
+                        datasets: [{
+                            label: 'Tổng Doanh Thu (vnđ)',
+                            data:response,
+                            backgroundColor: [
+                                'rgba(7, 95, 91, 1)',
+                                'rgba(7, 95, 91, 1)',
+                                'rgba(7, 95, 91, 1)',
+                                'rgba(7, 95, 91, 1)',
+                                'rgba(7, 95, 91, 1)',
+                                'rgba(7, 95, 91, 1)',
+                                'rgba(7, 95, 91, 1)',
+                                'rgba(7, 95, 91, 1)',
+                                'rgba(7, 95, 91, 1)',
+                                'rgba(7, 95, 91, 1)',
+                                'rgba(7, 95, 91, 1)',
+                                'rgba(7, 95, 91, 1)',
+                                
+                            ],
+                            borderColor: [
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 159, 64, 1)',
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
+        });
 
 
+        
+    });
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+   
+    $('#GetChanhXe').change(function (e) { 
+        e.preventDefault();
+        $('#TableChanhXe').empty();
+        var cx_id = $(this).val();  
+        console.log(cx_id);
+        $.ajaxSetup({
+        headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         $.ajax({
             type: "POST",
             url: "{{ route('admin-thong-ke-ajax')}}",
@@ -185,7 +322,7 @@
                 var table ='<tr>';
                 table+='<td> '+response[0].cx_tenchanhxe+' </td>';
                 table+='<td>'+response[0].cx_hoten+'</td>';
-                table+='<td > <strong style="float:right">'+tongDoanhThu+' vnđ</strong></td>';
+                table+='<td > <strong style="float:right">'+parseFloat(tongDoanhThu).toLocaleString('en-US')+' vnđ</strong></td>';
                 table+='</tr>';
                 $('#TableChanhXe').empty();
                 $('#TableChanhXe').append(table);

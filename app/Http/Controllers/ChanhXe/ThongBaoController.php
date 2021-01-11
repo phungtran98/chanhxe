@@ -23,6 +23,7 @@ class ThongBaoController extends Controller
             ->join('chitietdonvanchuyen as ctdvc','ctdvc.dvc_id','dvc.dvc_id')
             ->join('khachhang as kh','kh.kh_id','dvc.kh_id')
             ->where('dvc.dvc_thongbao','=',0)
+            ->where('dvc.cx_id',Auth::guard('chanhxe')->id())
             ->orderBy('dvc.dvc_id','DESC')
             ->get();
 

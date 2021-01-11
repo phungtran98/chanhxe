@@ -4,49 +4,25 @@ namespace App\Http\Controllers\ChanhXe;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use DB;
-use Session;
 use Auth;
-class ChanhXeController extends Controller
+use DB;
+use Hash;
+use Session;
+class XemHoaDonController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function AdminChanhXe()
+    public function index()
     {
-        $donTong=0;
-        $donDaGiao=0;
-        $donDangGiao=0;
-        $donHuy=0;
-        $donChoDuyet=0;
-        $don = DB::table('chitietdonvanchuyen as ctdvc')
-        ->join('donvanchuyen as dvc','dvc.dvc_id','ctdvc.dvc_id')
-        ->where('dvc.cx_id',Auth::guard('chanhxe')->id())->get();
-        $donTong += count($don);
-        
-        foreach($don as $val){
-            if($val->ctdvc_trangthaidon == 0)
-            {
-                $donChoDuyet+=1;
-            }
-            if($val->ctdvc_trangthaidon == 3)
-            {
-                $donDaGiao+=1;
-            }
-            if($val->ctdvc_trangthaidon == 4)
-            {
-                $donHuy+=1;
-            }
-            if($val->ctdvc_trangthaidon == 2)
-            {
-                $donDangGiao+=1;
-            }
-        }
-
-  
-        return view('admin.pages.chanhxe.index',compact('donChoDuyet','donDaGiao','donHuy','donTong','donDangGiao'));
+        $hoadon =DB::table('xemhoadon')
+        ->where('cx_id',Auth::guard('chanhxe')->id())
+        ->orderBy('xhd_id','DESC')
+        ->get();
+        // dd($hoadon);
+        return view('admin.pages.chanhxe.xemhoadon.index',compact('hoadon'));
     }
 
     /**
@@ -89,8 +65,18 @@ class ChanhXeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
-        //
+        $result = DB::table('xemhoadon')->where('xhd_id',$id)->delete();
+        if($result)
+        {
+            $request->session()->flash('mss', 'Xóa thành công!');
+            return redirect()->back();
+        }
+        else
+        {
+            $request->session()->flash('error', 'Xóa thất bại!');
+            return redirect()->back();
+        }
     }
 }

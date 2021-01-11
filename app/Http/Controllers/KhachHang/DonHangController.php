@@ -21,6 +21,8 @@ class DonHangController extends Controller
     public function DonHangIndex()
     {
     
+       
+       
         // dd( $id ); id của tuyến đường sau khi được chọn
         $kh_id = Auth::guard('khachhang')->id();
         $kho =DB::table('kho')->where('t_id',1)->get();
@@ -45,7 +47,7 @@ class DonHangController extends Controller
     //Sử dụng cái này lập đơn hàng
     public function DonHangIndex2($id)
     {
-        
+        $gia = DB::table('giacuoc')->select('gc_gia')->first();
         $kiemtra = DB::table('khachhang')->where('kh_id',auth::guard('khachhang')->id())->first();
 
         if($kiemtra->active == 0)
@@ -71,7 +73,7 @@ class DonHangController extends Controller
         
 
 
-        return view('admin.pages.khachhang.lapdonhang.index',compact(['thanhPho','khachhang','tuyen','kho']));
+        return view('admin.pages.khachhang.lapdonhang.index',compact(['thanhPho','khachhang','tuyen','kho','gia']));
        
     }
 

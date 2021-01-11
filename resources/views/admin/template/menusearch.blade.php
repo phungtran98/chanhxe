@@ -9,7 +9,7 @@
     </form>  --}}
    
     <!--search end-->
-    <p class="ThoiGian" id="ThoiGian">Thứ Bảy, 9/1/2021 - 20:30:52</p>
+    <p class="ThoiGian" id="ThoiGian"></p>
     @if (auth::guard('chanhxe')->check())
         <p id="TenChanhXe"> {{Auth::guard('chanhxe')->user()->cx_tenchanhxe}} </p>
     @elseif(auth::guard('admin')->check())

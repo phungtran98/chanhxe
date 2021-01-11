@@ -80,7 +80,6 @@ input#checkbox1,input#checkbox2 {
 </style>
 @endpush
 @section('content')
-
 <div class="row" id="regForm">
     <div class="col-md-12">
        <h3 style="/* float: left; *//* margin-left: 4px; */color: #075f5b;font-weight: bold;font-size: 20px;text-align: center;margin-top: -10px;">{{$tuyen->cx_tenchanhxe}}<span > Tuyến </span>{{$tuyen->t_tentuyen}}</h3> 
@@ -110,10 +109,23 @@ input#checkbox1,input#checkbox2 {
                             <label for="">Hình ảnh hàng hóa ( Nếu có )</label>
                             <input type="file" class="form-control-file" name="hh_hinhanh[]" multiple id="files" >
                             </div>
-                            <div class="form-group">
-                                <label for="">Giá trị của hàng hóa (VNĐ) <span class="star-red">*</span></label>
-                                <input type="number"
-                                class="form-control  CheckValue" name="hh_giatri" id=""  placeholder="" required>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Giá trị của hàng hóa <span class="star-red">*</span></label>
+                                        <input type="number"
+                                        class="form-control  CheckValue" name="hh_giatri" id="Gia"  placeholder="" required>
+                                        {{-- <p id="showPrice"></p> --}}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">(VNĐ)</label>
+                                        <p
+                                        class="form-control" id="showPrice" disabled> </p>
+                                     
+                                    </div>
+                                </div>
                             </div>
                           </div>
                           <div class="col-md-6" id="result">
@@ -163,7 +175,7 @@ input#checkbox1,input#checkbox2 {
                                     <div class="form-group">
                                         <label for="">Tổng khối lượng (KG)<span class="star-red">*</span></label>
                                         <input type="number" step="0.1"
-                                        class="form-control  CheckValue" min="0" name="hh_khoiluong" id="KG"  placeholder="" >
+                                        class="form-control  CheckValue" min="0" name="hh_khoiluong" id="TongKL"   placeholder="" >
                                        
                                     </div>
                                 </div>
@@ -171,10 +183,21 @@ input#checkbox1,input#checkbox2 {
                        </div>
                        
                     </div>
-                    <div class="form-group">
-                        <label for="">Số tiền thu hộ<span class="star-red">*</span></label>
-                        <input type="text"
-                        class="form-control" name="hh_tienthuho" id="hh_tienthuho" max="10000000000" value="0" placeholder="Nhập số tiền thu hộ" style="width:50%"   >
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Số tiền thu hộ<span class="star-red">*</span></label>
+                                <input type="text"
+                                class="form-control" name="hh_tienthuho" style="width:60%" id="ThuHo" max="10000000000" value="0" placeholder="Nhập số tiền thu hộ"    >
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">(VNĐ)</label>
+                                <p
+                                class="form-control" id="showPrice1" style="width:60%; magrin-left:-160px"  disabled ></p>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="">Ghi chú <span class="star-red">*</span></label>
@@ -216,6 +239,22 @@ input#checkbox1,input#checkbox2 {
                                         class="form-control" style="width:55%" name="kh_nhan_diachi" id="getPlace"  placeholder="30/4, Xuân Khánh,..">
                                         <input type="hidden" name="kh_nhan_km" id="kh_nhan_km" >
                                         <input type="hidden" name="kh_nhan_tgchay" id="kh_nhan_tgchay" >
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">Tổng cước dự kiến</label>
+                                        <p
+                                        class="form-control" id="TongCuoc" style="width:55%"  disabled></p>
+                                       
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">Tổng khoảng cách</label>
+                                        <p
+                                        class="form-control" id="TongKC" style="width:55%"  disabled></p>
+                                       
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -318,29 +357,30 @@ input#checkbox1,input#checkbox2 {
 @push('script')
 <script>
   
-//  $('#hh_tienthuho').keyup(function (e) { 
-//      var num = $(this).val();
-//     // console.log(num);
-//     $.ajaxSetup({
-//         headers: {
-//                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//             }
-//         });
-//     $.ajax({
-//         type: "post",
-//         url: " {{route('kh-ql-don-formart-number')}} ",
-//         data: {num:num},
-//         dataType: "json",
-//         success: function (response) {
-//             // console.log(response);
-//             // $('#hh_tienthuho').val();
-//             // $('#hh_tienthuho').val(response);
-//         }
-//     });
+  $(document).ready(function(){
+        $('#Gia').keyup(function(){
+            var value=$(this).val();
+            $('#showPrice').html(0);
+            console.log(value);
+            if(value!=0){
 
-//  });
+            value= parseFloat(value).toLocaleString('en-US');
+            $('#showPrice').append('');
+            $('#showPrice').html(value);
+            } 
+        });
+        $('#ThuHo').keyup(function(){
+            var value=$(this).val();
+            $('#showPrice1').html(0);
+            console.log(value);
+            if(value!=0){
 
-
+            value= parseFloat(value).toLocaleString('en-US');
+            $('#showPrice1').html('');
+            $('#showPrice1').html(value);
+            } 
+        });
+    });
 </script>
 
 
@@ -379,7 +419,7 @@ window.onload = function() {
     
     ></script>
 <script>
-   
+ 
    
 
     // Ggoogle map
@@ -408,7 +448,7 @@ window.onload = function() {
         getaddress(add)
         
       });
-      
+      var khoiluong=0;
      function getaddress(add)
      {
         var t_id =$('#t_id').val();
@@ -419,6 +459,7 @@ window.onload = function() {
             dataType: "json",
             success: function (response) {
                 console.log(response.k_diachi);
+                
                 calculateAndDisplayRoute(response.k_diachi,add)
             }
         });
@@ -463,6 +504,7 @@ window.onload = function() {
                             for (let j = 0; j < results.length; j++) {
                                 var element = results[j];
                                  dt =element.distance.text;
+                                 var khoangcach =element.distance.value;
                                  dr =element.duration.text;
                                
                             }
@@ -470,6 +512,13 @@ window.onload = function() {
                         // console.log(dt + dr);
                         $('#kh_nhan_km').val(dt);
                         $('#kh_nhan_tgchay').val(dr);
+                        $('#TongKC').html(dt);
+                        var khoiluong =$('#TongKL').val();
+                        var gia = {{$gia->gc_gia}};
+                        khoangcach = (khoangcach/1000);
+                        var tong = (khoangcach * gia * khoiluong);
+                        tong = parseFloat(tong).toLocaleString('en-US')
+                        $('#TongCuoc').html(tong+ ' vnđ');
                         }
                     } 
                     );
@@ -486,8 +535,8 @@ window.onload = function() {
     }
    
     
-
-
+    // var khoiluong = $('#KG').val();
+    // console.log(khoiluong);
 
 
  // Lấy dữ liệu Tỉnh - Quận - Huyện 

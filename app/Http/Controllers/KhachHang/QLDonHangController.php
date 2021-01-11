@@ -27,6 +27,9 @@ class QLDonHangController extends Controller
         ->join('donvanchuyen as dvc','dvc.dvc_id','ctdvc.dvc_id')
         ->join('khachhang as kh','kh.kh_id','dvc.kh_id')
         ->join('hanghoa as hh','hh.hh_id','ctdvc.hh_id')
+        ->join('tuyen as t','t.t_id','ctdvc.t_id')
+        ->join('xe as x','x.x_id','t.x_id')
+        ->join('chanhxe as cx','cx.cx_id','x.cx_id')
         ->where('dvc.kh_id',auth::guard('khachhang')->id())
         ->orderBy('ctdvc.ctdvc_id','DESC')
         ->get();
@@ -68,9 +71,9 @@ class QLDonHangController extends Controller
         ->join('tuyen as t','t.t_id','ctdvc.t_id')
         ->join('xe as x','x.x_id','t.x_id')
         ->join('chanhxe as cx','cx.cx_id','x.cx_id')
-        ->where('cx.cx_id',auth::guard('khachhang')->id())
+        ->where('dvc.kh_id',auth::guard('khachhang')->id())
         ->where('ctdvc.ctdvc_trangthaidon',$data)
-        // ->orderBy('ctdvc.ctdvc_id','DESC')
+        ->orderBy('ctdvc.ctdvc_id','DESC')
         ->get();
 
         // dd($ctdvc);
