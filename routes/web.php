@@ -104,7 +104,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/cap-nhat-gia-cuoc','Admin\GiaCuocController@store')->name('admin-gia-cuoc-submit');
 
         // Thốnng kê chành xe theo năm
-        Route::post('/thong-ke-don-admin','Admin\ThongKeController@storeAjax')->name('cx-thong-ke-don-theo-nam-admin');
+        Route::post('/thong-ke-don-admin','Admin\ThongKeControl ler@storeAjax')->name('cx-thong-ke-don-theo-nam-admin');
     
         //Đăng xuất 
         Route::get('/dang-xuat-admin','AuthController@LogoutAdmin')->name('logout-admin');

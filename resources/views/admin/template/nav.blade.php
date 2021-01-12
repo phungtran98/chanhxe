@@ -87,7 +87,7 @@
                     <li class="{{Request::path()== 'chanh-xe/quan-li-khach-hang' ? 'active' : '' }}"><a href="{{ route('cx-quan-li-khach-hang') }}"><i class="fa fa-user"></i> <span>Quản lí khách hàng</span></a>
                     </li>
                     <li class="{{Request::path()== 'chanh-xe/chanh-xe/thong-ke-don-hang' ? 'active' : '' }}"><a href="{{ route('cx-thong-ke-don') }}"><i class="fa fa-bar-chart-o"></i> <span>Thống kê đơn - doanh thu</span></a>
-                    <li class="{{Request::path()== 'chanh-xe/chanh-xe/thong-ke-don-hang' ? 'active' : '' }}"><a href="{{ route('cx-xem-hoa-don') }}"><i class="fa fa-bar-chart-o"></i> <span>Hóa đơn</span></a>
+                    <li class="{{Request::path()== 'chanh-xe/xem-hoa-don' ? 'active' : '' }}"><a href="{{ route('cx-xem-hoa-don') }}"><i class="fa fa-money"></i><span>Hóa đơn</span></a>
                     </li>
                     <li class="menu-list"><a href=""><i class="fa fa-cogs"></i> <span>Cài đặt</span></a>
                         <ul class="sub-menu-list">
