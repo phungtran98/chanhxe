@@ -67,6 +67,15 @@ return [
             'driver' => 'token',
             'provider' => 'chanhxe',
         ],
+         //Xác thực dành cho admin
+         'admin' => [
+            'driver' => 'session',
+            'provider' => 'admin',
+        ],
+        'admin-api' => [
+            'driver' => 'token',
+            'provider' => 'admin',
+        ],
     ],
 
     /*
@@ -106,6 +115,12 @@ return [
             'driver' => 'eloquent',
             'model' => App\Chanhxe::class,
         ],
+
+
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Admin::class,
+        ],
     ],
 
     /*
@@ -137,6 +152,12 @@ return [
         ],
 
         'chanhxe' => [
+            'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
+        'admin' => [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,

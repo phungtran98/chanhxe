@@ -285,8 +285,8 @@
     }
   
   </script>
-  {{-- <script async defer
+  <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaaygZT7_LyyyK1fE9Wf9nsBHfJXgzXXY&libraries=places&callback=initMap"
   
-  ></script> --}}
+  ></script>
 @endpush

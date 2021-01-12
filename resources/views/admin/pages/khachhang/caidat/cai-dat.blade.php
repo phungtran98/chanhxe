@@ -27,20 +27,12 @@
             width: 100%;
             /* border: 1px solid; */
         }
-        .row.info-acc {
-            width: 70%;
-            margin: auto;
-        }
+       
         .row.info-accc {
-            width: 80%;
-            margin: auto;
+        width: 80%;
+        margin: auto;
         }
-        .active-infor{
-            background-color: #353F4F;
-            text-decoration: none;
-            color: white;
-        }
-        .kiemtra {
+            .kiemtra {
             border: 2px solid green;
         }
         .kiemtra-error {

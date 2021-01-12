@@ -13,10 +13,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(ChanhXeTableSeeder::class);
         $this->call(KhachHangTableSeeder::class);
-        $this->call(XeTableSeeder::class);
-        $this->call(BaiDauXeTableSeeder::class);
-        $this->call(TuyenTableSeeder::class);
-        $this->call(ChiTietDiaChiTableSeeder::class);
        
     }
 }

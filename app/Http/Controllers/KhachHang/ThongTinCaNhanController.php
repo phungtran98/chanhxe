@@ -8,6 +8,7 @@ use auth;
 use DB;
 use Session;
 use Hash;
+use Nexmo;
 class ThongTinCaNhanController extends Controller
 {
     /**
@@ -75,8 +76,8 @@ class ThongTinCaNhanController extends Controller
         
         $data['kh_hoten'] = $request->kh_hoten;
         $data['kh_sdt'] = $request->kh_sdt;      
-        $data['code'] = 000;
-        $data['active'] = 0;  
+        // $data['code'] = 000;
+        // $data['active'] = 0;  
 
 
         try{
@@ -84,21 +85,35 @@ class ThongTinCaNhanController extends Controller
             DB::table('khachhang')->where('kh_id',Auth::guard('khachhang')->id())->update($data);
             
 
-            $string=rand(1000,9999);
-            // $string='phung dep troai';
-            // $nexmo = app('Nexmo\Client');
-
-            // $nexmo->message()->send([
-            //     'to'   => '84868692240',
-            //     'from' => 'Vonage APIs',
-            //     'text' => 'Mã xác minh của bạn là: '.$string,
-            // ]);
-            // $request->merge(['text' => ($string)]);
 
 
 
-            // return redirect()->back();
-            return view('admin.pages.khachhang.caidat.xac-thuc',compact('request'));
+            $active =DB::table('khachhang')
+            ->where('kh_id',Auth::guard('khachhang')->id())
+            ->select('active')->first();
+            // dd($active->active);
+            if($active->active == 0 )
+            {
+                // $string=1212;
+                $string=rand(1000,9999);
+                // $basic  = new \Nexmo\Client\Credentials\Basic('a81ee7fa', 'Amv1gQPDJrZbc0yG');
+                // $client = new \Nexmo\Client($basic);
+                
+                // $message = $client->message()->send([
+                //     'to' => '84868692240',
+                //     'from' => 'Vonage APIs',
+                //     'text' =>  $string
+                // ]);
+                $mahoa = Hash::make($string);
+                $request->merge(['text' => ($mahoa)]);
+            
+                
+
+                // return redirect()->back();
+                return view('admin.pages.khachhang.caidat.xac-thuc',compact('request'));
+            }
+            return redirect()->route('kh-cai-dat-thong-tin-ca-nhan');
+            
         }
         catch(ModelNotFoundException $exception)
         {
@@ -108,7 +123,21 @@ class ThongTinCaNhanController extends Controller
     }
     public function XacThuc(Request $request)
     {
-       
+        // dd(Auth::guard('khachhang')->id());
+       if(Hash::check($request->MaInput,$request->MaOutput))
+       {
+           DB::table('khachhang')->where('kh_id',Auth::guard('khachhang')->id())->update([
+               'active'=>1,
+               'code'=>Hash::make($request->MaInput)
+           ]);
+            Session::flash('OTPS', 'Xác thực thành công!');
+            return redirect()->route('kh-cai-dat-thong-tin-ca-nhan');
+       }
+       else
+       {
+            Session::flash('OTPF', 'Xác thực không thành công!');
+            return redirect()->route('kh-cai-dat-thong-tin-ca-nhan');
+       }
     }
   
     //Đổi mật khẩu

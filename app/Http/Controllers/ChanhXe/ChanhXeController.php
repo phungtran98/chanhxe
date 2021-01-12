@@ -4,7 +4,9 @@ namespace App\Http\Controllers\ChanhXe;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use DB;
+use Session;
+use Auth;
 class ChanhXeController extends Controller
 {
     /**
@@ -14,7 +16,37 @@ class ChanhXeController extends Controller
      */
     public function AdminChanhXe()
     {
-        return view('admin.pages.chanhxe.index');
+        $donTong=0;
+        $donDaGiao=0;
+        $donDangGiao=0;
+        $donHuy=0;
+        $donChoDuyet=0;
+        $don = DB::table('chitietdonvanchuyen as ctdvc')
+        ->join('donvanchuyen as dvc','dvc.dvc_id','ctdvc.dvc_id')
+        ->where('dvc.cx_id',Auth::guard('chanhxe')->id())->get();
+        $donTong += count($don);
+        
+        foreach($don as $val){
+            if($val->ctdvc_trangthaidon == 0)
+            {
+                $donChoDuyet+=1;
+            }
+            if($val->ctdvc_trangthaidon == 3)
+            {
+                $donDaGiao+=1;
+            }
+            if($val->ctdvc_trangthaidon == 4)
+            {
+                $donHuy+=1;
+            }
+            if($val->ctdvc_trangthaidon == 2)
+            {
+                $donDangGiao+=1;
+            }
+        }
+
+  
+        return view('admin.pages.chanhxe.index',compact('donChoDuyet','donDaGiao','donHuy','donTong','donDangGiao'));
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\KhachHang;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use Auth;
 class ThongTinChanhXeController extends Controller
 {
     /**
@@ -13,7 +14,21 @@ class ThongTinChanhXeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index($id)
-    {
+    {   //id của chành xe nào đó
+        
+        $tuyen= DB::table('tuyen as t')
+        ->join('xe','xe.x_id','t.x_id')
+        ->join('chanhxe as cx','cx.cx_id','xe.cx_id')
+        // ->join('kho as k','k.t_id','t.t_id')
+        ->where('cx.cx_id',$id)
+        ->OrderBy('t.t_id','DESC')
+        ->get();
+
+        
+        foreach($tuyen as $val){
+            $t_id = $val->t_id;
+        }
+        $kho = DB::table('kho')->get();
         $chanhxe = DB::table('chanhxe')->where('cx_id',$id)->first();
         //Lấy bình luận của chành xe
         $binhluan = DB::table('binhluan as bl')
@@ -58,7 +73,7 @@ class ThongTinChanhXeController extends Controller
         else
         $rate = number_format($rate/$count,1) ;
         // dd($star);
-        return view('admin.pages.khachhang.trangchu.thong-tin-chanh-xe',compact(['chanhxe','binhluan','rate','star']));
+        return view('admin.pages.khachhang.dashboard.thong-tin-chanh-xe',compact(['chanhxe','binhluan','rate','star','tuyen','kho']));
     }
 
     /**

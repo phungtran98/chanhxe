@@ -16,7 +16,7 @@
                     </div>
                     <div class="col-xs-8">
                         <span class="state-title"> Tổng đơn hàng</span>
-                        <h4>01</h4>
+                        <h4> {{$donTong}} </h4>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                     </div>
                     <div class="col-xs-8">
                         <span class="state-title"> Số đơn đã giao</span>
-                        <h4>0</h4>
+                        <h4> {{$donDaGiao}} </h4>
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="col-xs-8">
                         <span class="state-title">  Số đơn bị hủy  </span>
-                        <h4>0</h4>
+                        <h4>{{$donHuy }}</h4>
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@
                     </div>
                     <div class="col-xs-8">
                         <span class="state-title">  Số đơn chờ duyệt  </span>
-                        <h4>0</h4>
+                        <h4> {{$donChoDuyet}} </h4>
                     </div>
                 </div>
             </div>

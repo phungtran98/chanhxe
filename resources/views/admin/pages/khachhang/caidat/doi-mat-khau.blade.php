@@ -11,7 +11,7 @@
             {{ Session::get('alert') }}
         </p>
     @endif
-    <div class="row info-accc">
+    {{-- <div class="row info-accc">
         <form action="{{ route('kh-cai-dat-doi-mat-khau-cap-nhat') }}" method="post">
             @csrf
             <div class="table-responsive text-nowrap">
@@ -76,7 +76,57 @@
                 <!--Table-->
             </div>
         </form>
-    </div>
+    </div> --}}
+    <div class="row info-accc">
+      <form action="{{ route('kh-cai-dat-doi-mat-khau-cap-nhat') }}" method="post">
+        <div class="form-group" style="padding:20px 0; ">
+            <label  class="col-lg-3 col-sm-3 control-label">Tài khoản</label>
+            <div class="col-lg-9">
+                <div class="iconic-input text-w">
+                    <i class="fa fa-user"></i>
+                    <input type="text"
+                    class="form-control" readonly value=" {{$kh->username}}   ">
+                </div>
+            </div>
+        </div>
+        <div class="form-group" style="padding:20px 0; ">
+            <label  class="col-lg-3 col-sm-3 control-label">Mật khẩu cũ</label>
+            <div class="col-lg-9">
+                <div class="iconic-input right text-w">
+                    <i class="fa fa-lock"></i>
+                    <input type="password"
+              class="form-control" id="pass1"  placeholder="Nhập mật khẩu cũ">
+                </div>
+            </div>
+        </div>
+        <div class="form-group" style="padding:20px 0; ">
+            <label  class="col-lg-3 col-sm-3 control-label">Mật khẩu mới</label>
+            <div class="col-lg-9">
+                <div class="iconic-input right text-w">
+                    <i class="fa fa-lock"></i>
+                    <input type="password"
+                    class="form-control " name="cx_password2" id="pass2"  placeholder="Nhập mật khẩu mới" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" style="padding:20px 0; ">
+            <label  class="col-lg-3 col-sm-3 control-label">Nhập lại mật khẩu</label>
+            <div class="col-lg-9">
+                <div class="iconic-input right text-w">
+                    <i class="fa fa-lock"></i>
+                    <input type="password"
+                    class="form-control " name="cx_password3" id="re-pass2"  placeholder="Nhập lại mật khẩu" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" style="padding:20px 0; ">
+          <div class="col-sm-9">
+              <button type="submit" class="btn btn-success" id="CapNhat" style="float:right;margin-right: -155px;" disabled>Cập nhật</button>
+
+          </div>
+        </div>
+  </form>
+  </div>
 </div>  
 @endsection
 @push('script')

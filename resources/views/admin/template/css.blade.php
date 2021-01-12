@@ -18,8 +18,12 @@
   <link rel="stylesheet" href="{{asset('vendor/admin/js/data-tables/DT_bootstrap.css')}}" />
 
   <link href="{{asset('vendor/admin/css/style.css')}}" rel="stylesheet">
+  <link href="{{asset('vendor/admin/css/jquery.stepy.css')}}" rel="stylesheet">
   <link href="{{asset('vendor/admin/css/style-responsive.css')}}" rel="stylesheet">
-
+  {{-- <link href="{{asset('vendor/datepicker/css/bootstrap.min.css')}}" rel="stylesheet" /> --}}
+  <link href="{{asset('vendor/datepicker/css/datepicker.css')}}" rel="stylesheet" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>

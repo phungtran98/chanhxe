@@ -12,10 +12,10 @@
             <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Nhập mã Code:</label>
-                  <input type="text"
-                    class="form-control" name="" id=""  value=" {{$request->text}} " placeholder="Nhập mã code...">
+                  <input type="number"
+                    class="form-control" name="MaInput" id=""   placeholder="Nhập mã code..." style="width:40%">
                   <input type="hidden"
-                    class="form-control" name="" id="" >
+                    class="form-control" name="MaOutput" id="" value="{{$request->text}}">
                 </div>
             </div>
             <div class="col-md-12">
