@@ -125,7 +125,7 @@
         e.preventDefault();
         var nam = $(this).val();
         var cx_id = $('#GetChanhXe').val();
-        alert(cx_id);
+        // alert(cx_id);
         $.ajaxSetup({
         headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

@@ -22,11 +22,11 @@
 
         <!--logo and iconic logo start-->
         <div class="logo">
-            <a href="index-2.html"><img src="{{asset('vendor/admin/images/logo.png')}}" alt=""></a>
+            <a href="#"><img style="width: 66%;margin-top: -53px;margin-left: 14px;" src="{{asset('vendor/pq.png')}}" alt=""></a>
         </div>
 
         <div class="logo-icon text-center">
-            <a href="index-2.html"><img src="{{asset('vendor/admin/images/logo_icon.png')}}" alt=""></a>
+            {{-- <a href="#"><img src="{{asset('vendor/admin/images/logo_icon.png')}}" alt=""></a> --}}
         </div>
         <!--logo and iconic logo end-->
 
@@ -76,11 +76,11 @@
                 @elseif(auth::guard('chanhxe')->check())
                     <li class="{{Request::path()== 'chanh-xe/dashboard' ? 'active' : '' }}"><a href="{{ route('cx-dashboard') }}"><i class="fa fa-home"></i> <span>Trang chủ</span></a>
                     </li>
-                    <li class="{{Request::path()== 'chanh-xe/tuyen-xe' ? 'active' : '' }}"><a href="{{ route('cx-tuyen-xe') }}"><i class="fa fa-arrows-alt"></i> <span>Quản lí tuyến</span></a>
+                    <li class="{{Request::path()== 'chanh-xe/cx-xe' ? 'active' : '' }}"><a href="{{ route('cx-xe') }}"><i class="fa fa-truck"></i><span>Quản lí xe</span></a>
                     </li>
                     <li class="{{Request::path()== 'chanh-xe/tai-xe' ? 'active' : '' }}"><a href="{{ route('cx-tai-xe') }}"><i class="fa fa-user"></i> <span>Quản lí tài xế</span></a>
                     </li>
-                    <li class="{{Request::path()== 'chanh-xe/cx-xe' ? 'active' : '' }}"><a href="{{ route('cx-xe') }}"><i class="fa fa-truck"></i><span>Quản lí xe</span></a>
+                    <li class="{{Request::path()== 'chanh-xe/tuyen-xe' ? 'active' : '' }}"><a href="{{ route('cx-tuyen-xe') }}"><i class="fa fa-arrows-alt"></i> <span>Quản lí tuyến</span></a>
                     </li>
                     <li class="{{Request::path()== 'chanh-xe/quan-li-don-dat-hang' ? 'active' : '' }}"><a href="{{ route('cx-quan-li-don-dat-hang') }}"><i class="fa fa-list-alt"></i> <span>Quản lí đơn đặt hàng</span></a>
                     </li>

@@ -13,9 +13,9 @@
 @push('css')
 <style>
  button#Add-address {
-    position: absolute;
+    /* position: absolute;
     left: 515px;
-    top: 100px;
+    top: 100px; */
     background: #64cca6;
     border-color: #64cca6;
 }
@@ -55,11 +55,14 @@
                     <div class="form-group">
                         <label for="">Vị trí kho <span class="star-red">*</span></label>
                         <input type="text"class="form-control" name="" id="start" placeholder="Nhập vào địa chỉ">
-                        <button class="btn btn-success" id="Add-address">Thêm</button>
                         <input type="hidden"class="form-control" name="" id="Lat" >
                         <input type="hidden"class="form-control" name="" id="Lng" >
                         <input type="hidden"class="form-control" name="" value=" {{$id}} " id="Tuyen_id" >
                     </div>
+                   
+                </div>
+                <div class="col-md-12">
+                    <button class="btn btn-success" id="Add-address">Thêm</button>
                 </div>
                 <div class="col-md-12">
                     <table class="table table-bordered " id="Location-table">
