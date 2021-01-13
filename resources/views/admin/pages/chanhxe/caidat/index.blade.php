@@ -154,7 +154,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            {{-- <div class="col-md-12">
                 <div class="panel">
                     <div class="panel-body p-states">
                         <div class="summary pull-left">
@@ -163,7 +163,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             {{-- Hiện thị đánh giá --}}
             <div class="col-md-12">
                 <div class="panel">

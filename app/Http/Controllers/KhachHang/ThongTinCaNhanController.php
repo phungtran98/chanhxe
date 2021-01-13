@@ -96,14 +96,14 @@ class ThongTinCaNhanController extends Controller
             {
                 // $string=1212;
                 $string=rand(1000,9999);
-                // $basic  = new \Nexmo\Client\Credentials\Basic('a81ee7fa', 'Amv1gQPDJrZbc0yG');
-                // $client = new \Nexmo\Client($basic);
+                $basic  = new \Nexmo\Client\Credentials\Basic('a81ee7fa', 'Amv1gQPDJrZbc0yG');
+                $client = new \Nexmo\Client($basic);
                 
-                // $message = $client->message()->send([
-                //     'to' => '84868692240',
-                //     'from' => 'Vonage APIs',
-                //     'text' =>  $string
-                // ]);
+                $message = $client->message()->send([
+                    'to' => '84868692240',
+                    'from' => 'Vonage APIs',
+                    'text' =>  $string
+                ]);
                 $mahoa = Hash::make($string);
                 $request->merge(['text' => ($mahoa)]);
             
