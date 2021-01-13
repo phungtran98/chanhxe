@@ -76,9 +76,9 @@
                 @elseif(auth::guard('chanhxe')->check())
                     <li class="{{Request::path()== 'chanh-xe/dashboard' ? 'active' : '' }}"><a href="{{ route('cx-dashboard') }}"><i class="fa fa-home"></i> <span>Trang chủ</span></a>
                     </li>
-                    <li class="{{Request::path()== 'chanh-xe/cx-xe' ? 'active' : '' }}"><a href="{{ route('cx-xe') }}"><i class="fa fa-truck"></i><span>Quản lí xe</span></a>
-                    </li>
                     <li class="{{Request::path()== 'chanh-xe/tai-xe' ? 'active' : '' }}"><a href="{{ route('cx-tai-xe') }}"><i class="fa fa-user"></i> <span>Quản lí tài xế</span></a>
+                    </li>
+                    <li class="{{Request::path()== 'chanh-xe/cx-xe' ? 'active' : '' }}"><a href="{{ route('cx-xe') }}"><i class="fa fa-truck"></i><span>Quản lí xe</span></a>
                     </li>
                     <li class="{{Request::path()== 'chanh-xe/tuyen-xe' ? 'active' : '' }}"><a href="{{ route('cx-tuyen-xe') }}"><i class="fa fa-arrows-alt"></i> <span>Quản lí tuyến</span></a>
                     </li>
