@@ -159,7 +159,7 @@ input#checkbox1,input#checkbox2 {
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                    {{-- <label for="">Quy đổi (Kg)</label> --}}
+                                    {{-- <label for="">(Quy đ tham khảo)</label> --}}
                                         <input type="number"
                                         class="form-control" name="hh_khoiluong" id="KG" disabled  placeholder="Quy đổi (KG)" >
                                     </div>
